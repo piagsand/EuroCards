@@ -6,7 +6,7 @@ let duplicateCards = {};
 const euroCards = {
 
     "Euro Winner and hosts": {
-        "UEFA": ["TOPPS 1", "UEFA-1", "UEFA-2", "UEFA-3"]
+        "UEFA": ["TOPPS-1", "UEFA-1", "UEFA-2", "UEFA-3"]
     },
 
     "Germany as host": {
@@ -231,7 +231,9 @@ Object.values(euroCards).forEach(group => {
 // Function to add cards
 function addCards() {
     const cardInput = document.getElementById('cardInput');
-    const cardNumbers = cardInput.value.split(',').map(card => card.trim().toUpperCase());
+    const cardNumbers = cardInput.value.split(',')
+        .map(card => card.trim().toUpperCase().replace(/[^A-Z0-9-]/g, ''))
+        .map(card => card.replace(/^([A-Z]+)(\d+)$/, '$1-$2')); // Transforme "SUI1" en "SUI-1"
     cardInput.value = '';
 
     let addedCards = [];
@@ -270,63 +272,26 @@ function displayMessage(addedCards, duplicateCards, invalidCards) {
     let messages = [];
 
     if (addedCards.length > 0) {
-        messages.push(`Added cards: ${addedCards.join(', ')}`);
+        const message = addedCards.length === 1 ? 'Carte ajoutée : ' : 'Cartes ajoutées : ';
+        messages.push(message + addedCards.join(', '));
     }
 
     if (duplicateCards.length > 0) {
-        messages.push(`Duplicate cards: ${duplicateCards.join(', ')}`);
+        const message = duplicateCards.length === 1 ? 'Carte en double : ' : 'Cartes en double : ';
+        messages.push(message + duplicateCards.join(', '));
     }
 
     if (invalidCards.length > 0) {
-        messages.push(`Invalid cards: ${invalidCards.join(', ')}`);
+        const message = invalidCards.length === 1 ? 'Carte invalide : ' : 'Cartes invalides : ';
+        messages.push(message + invalidCards.join(', '));
     }
 
     messageElement.innerHTML = messages.map(message => {
-        const color = message.startsWith('Invalid cards') ? 'red' : 'green';
+        const color = message.startsWith('Carte invalide') ? 'red' : 'green';
         return `<p style="color: ${color};">${message}</p>`;
     }).join('');
 }
 
-// function updateList(listId, items) {
-
-//     const list = document.getElementById(listId);
-//     list.innerHTML = '';
-
-//     if (typeof items === 'object') {
-//         Object.keys(items).forEach(key => {
-//             const listItem = createListItemWithCheckbox(key, items[key]);
-//             list.appendChild(listItem);
-//         });
-//     } else {
-//         console.error('updateList expects an object, received:', items);
-//         return;
-//     }
-// }
-
-// function createListItem(cardNumber, duplicateCount = null) {
-//     const listItem = document.createElement('li');
-//     listItem.style.cursor = 'pointer'; // Style pour rendre les éléments de la liste cliquables
-
-//     const checkbox = document.createElement('input');
-//     checkbox.type = 'checkbox'; // Définir le type d'élément comme une case à cocher
-//     checkbox.value = cardNumber; // Affecter le numéro de la carte comme valeur de la case à cocher
-
-//     // Ajouter le texte de l'élément
-//     const text = duplicateCount
-//         ? ` Carte ${cardNumber.padStart(3, '0')} (${duplicateCount}x)` // Texte pour les cartes en double
-//         : ` Carte ${cardNumber.padStart(3, '0')}`; // Texte pour les cartes simples
-
-//     // Ajouter un écouteur de clic sur l'élément `li` pour cocher/décocher la case à cocher
-//     listItem.addEventListener('click', function (event) {
-//         if (event.target !== checkbox) { // Si le clic n'est pas directement sur la checkbox
-//             checkbox.checked = !checkbox.checked; // Basculer l'état de la case à cocher
-//         }
-//     });
-
-//     listItem.appendChild(checkbox); // Ajouter la case à cocher à l'élément de la liste
-//     listItem.appendChild(document.createTextNode(text)); // Ajouter le texte à l'élément de la liste
-//     return listItem;
-// }
 
 function updateList(listId, items) {
     const list = document.getElementById(listId);
@@ -424,28 +389,45 @@ function markGivenCards_old() {
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
     displayFeedback(processedCards, invalidCards);
 }
+
+function standardizeCardNumber(cardNumber) {
+    return cardNumber.replace(/(\D+)(\d+)/, '$1-$2').toUpperCase();
+}
+
 function markGivenCards() {
     const givenInput = document.getElementById('givenInput');
-    const cardNumbers = givenInput.value.split(',').map(card => card.trim());
+    const cardNumbers = givenInput.value.split(',').map(card => standardizeCardNumber(card.trim()));
     givenInput.value = '';
 
     let processedCards = [];
-    let invalidCards = [];
+    let removedCards = [];
 
     cardNumbers.forEach(cardNumber => {
         if (duplicateCards[cardNumber] && duplicateCards[cardNumber] > 0) {
             duplicateCards[cardNumber] -= 1;
             if (duplicateCards[cardNumber] === 0) {
                 delete duplicateCards[cardNumber];
+                removedCards.push(cardNumber);
+                const listItem = document.querySelector(`#duplicateCards li input[value="${cardNumber}"]`);
+                if (listItem) {
+                    listItem.closest('li').remove();
+                }
+            } else {
+                processedCards.push(`${cardNumber} (${duplicateCards[cardNumber]}x)`);
+                const listItem = document.querySelector(`#duplicateCards li input[value="${cardNumber}"]`);
+                if (listItem) {
+                    listItem.nextSibling.nodeValue = ` ${cardNumber} (${duplicateCards[cardNumber]}x)`;
+                }
             }
-            processedCards.push(cardNumber);
         } else {
-            invalidCards.push(cardNumber);
+            removedCards.push(cardNumber);
         }
     });
+
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
-    displayFeedback(processedCards, invalidCards);
+    displayFeedback(processedCards, removedCards);
 }
+
 
 function markCheckedAsGiven() {
     const checkboxes = document.querySelectorAll('#duplicateCards input[type="checkbox"]:checked');
@@ -453,16 +435,18 @@ function markCheckedAsGiven() {
     let removedCards = [];
 
     checkboxes.forEach(checkbox => {
-        const cardNumber = checkbox.value.trim();
+        const cardNumberWithCount = checkbox.value.trim();
+        const cardNumber = cardNumberWithCount.split(' ')[0]; // Extrait "SUI-1" de "SUI-1 (1x)"
         if (duplicateCards[cardNumber] > 1) {
             duplicateCards[cardNumber] -= 1;
             processedCards.push(`${cardNumber} (${duplicateCards[cardNumber]}x)`);
         } else {
             delete duplicateCards[cardNumber];
             removedCards.push(cardNumber);
-            checkbox.closest('li').remove();
+            checkbox.closest('li').remove(); // Supprime visuellement l'élément de la liste
         }
     });
+
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
     displayFeedback(processedCards, removedCards);
 }
@@ -479,40 +463,6 @@ function displayFeedback(processedCards, removedCards) {
     messageElement.textContent = message;
 }
 
-function markCheckedAsGiven_old() {
-    const checkboxes = document.querySelectorAll('#duplicateCards input[type="checkbox"]:checked');
-    let processedCards = [];
-    let removedCards = [];
-
-    checkboxes.forEach(checkbox => {
-        const cardNumber = checkbox.value.trim();
-        if (duplicateCards[cardNumber] > 1) {
-            duplicateCards[cardNumber] -= 1;
-            processedCards.push(`${cardNumber} (${duplicateCards[cardNumber]}x)`);
-        } else {
-            delete duplicateCards[cardNumber];
-            removedCards.push(cardNumber);
-            checkbox.closest('li').remove();
-        }
-    });
-
-    updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
-    displayFeedback(processedCards, removedCards);
-}
-function displayFeedback_old(processedCards, invalidCards) {
-    const messageElement = document.getElementById('message');
-    let message = "";
-
-    if (processedCards.length > 0) {
-        message += `Processed cards: ${processedCards.join(', ')}. `;
-    }
-
-    if (invalidCards.length > 0) {
-        message += `Invalid cards: ${invalidCards.join(', ')}.`;
-    }
-
-    messageElement.textContent = message;
-}
 
 function exportDataToJson() {
     const data = {
