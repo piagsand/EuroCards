@@ -1,0 +1,43 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+label,
+input,
+button {
+  margin: 10px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  width: 10%; /* Ajustez selon le nombre de colonnes souhaitées */
+  list-style-type: none; /* Enlève les puces de liste */
+}
+
+li:hover {
+  background-color: #f1f1f1;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.selected {
+  background-color: #eef;
+}
+
+#ownedCards,
+#missingCards,
+#duplicateCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}

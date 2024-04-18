@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion des cartes Euro 2024 de Topps</title>
+    <link rel="stylesheet" href="styleFoot3.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="nav-bar">
+        <ul>
+          <li id="logo">PAXALOM-UEFA</li>
+          <li><a href="#cards-missing">Cartes manquantes</a></li>
+          <li><a href="#cards-owned">Cartes acquises</a></li>
+          <li><a href="#cards-duplicate">Cartes à double</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <h1>Gestionnaire de cartes Euro 2024 de Topps</h1>
+
+    <section>
+      <input
+        type="text"
+        id="cardInput"
+        placeholder="Entrez les numéros de carte, séparés par des virgules (ex: SP-1, SP-2, SP-3)"
+      />
+      <button onclick="addCards()">Ajouter les Cartes</button>
+      <div id="message"></div>
+      <button onclick="moveSelectedToOwned()">
+        Ajouter aux cartes acquises
+      </button>
+    </section>
+
+    <section>
+      <h2 class="typeOfCards" id="cards-missing">Cartes manquantes</h2>
+      <ul id="missingCards"></ul>
+      <div id="groupsContainer"></div>
+    </section>
+
+    <section>
+      <h2 class="typeOfCards" id="cards-owned">Cartes acquises</h2>
+      <ul id="ownedCards"></ul>
+      <button onclick="markAsDuplicate()">Marquer comme double</button>
+    </section>
+
+    <section>
+      <h2 class="typeOfCards" id="cards-duplicate">Doubles</h2>
+      <ul id="duplicateCards"></ul>
+      <input type="text" id="givenInput" placeholder="Ex: 005, 123, 156" />
+      <button onclick="markGivenCards()">Enlever double</button>
+      <div id="messageDouble"></div>
+
+      <button onclick="markCheckedAsGiven()">
+        Marquer sélectionnées comme donné
+      </button>
+    </section>
+
+    <button onclick="exportDataToJson()">Exporter les données</button>
+    <button onclick="document.getElementById('fileInput').click()">
+      Importer les données
+    </button>
+    <input
+      type="file"
+      id="fileInput"
+      onchange="importDataFromJson(event)"
+      style="display: none"
+    />
+
+    <script src="scripts.js"></script>
+  </body>
+  <footer></footer>
+</html>

@@ -1,0 +1,92 @@
+/* Styles de base pour le corps et la page */
+body {
+  font-family: "Helvetica Neue", sans-serif;
+  background-color: #f7f7f7; /* Arrière-plan neutre */
+  color: #333; /* Couleur de texte principale */
+  margin: 0;
+  padding: 20px;
+}
+
+/* Styles pour les titres */
+h1 {
+  color: #2a7ae2; /* Bleu vif pour l'UEFA */
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: 0;
+  font-weight: bold;
+}
+
+h2 {
+  border-bottom: 3px solid #2a7ae2; /* Bordure de couleur pour souligner les sous-titres */
+  color: #333;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+/* Conteneur pour les sections de la page */
+section {
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour donner du relief */
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+/* Styles pour les listes de cartes */
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0; /* Réduire la marge extérieure de la liste */
+  list-style-type: none;
+  gap: 10px; /* Espacement uniforme entre les éléments de la liste */
+}
+
+li {
+  background-color: #e3f2fd; /* Bleu très clair pour les éléments de liste */
+  border: 1px solid #2a7ae2; /* Bordure bleue */
+  border-radius: 4px; /* Rayon de la bordure plus petit pour des cases moins arrondies */
+  margin: 5px; /* Réduire la marge autour des éléments de liste */
+  padding: 8px; /* Réduire l'espacement intérieur */
+  flex: 0 0 calc(20% - 10px); /* Ajustement pour cinq colonnes, réduction de la largeur */
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: transform 0.2s; /* Transition pour effet au survol */
+  font-size: 0.8rem; /* Réduire la taille de la police */
+}
+
+/* Ajustement des cases à cocher */
+input[type="checkbox"] {
+  margin-right: 5px; /* Espacement réduit autour de la case à cocher */
+  cursor: pointer;
+}
+
+/* Ajustement pour les boutons */
+button {
+  padding: 8px 16px; /* Réduire le remplissage des boutons */
+  font-size: 0.8rem; /* Réduire la taille de la police des boutons */
+}
+
+/* Ajustement pour les entrées de texte */
+input[type="text"] {
+  padding: 8px; /* Réduire le remplissage des champs de saisie */
+  font-size: 0.8rem; /* Réduire la taille de la police des champs de saisie */
+}
+
+/* Ajustement pour les titres de groupe */
+#groupsContainer h2,
+#groupsContainer h3 {
+  margin-top: 10px; /* Réduire l'espacement au-dessus des titres de groupe */
+  margin-bottom: 10px; /* Réduire l'espacement en dessous des titres de groupe */
+}
+
+@media (max-width: 800px) {
+  li {
+    flex: 0 0 calc(50% - 10px); /* Réduire la largeur des cases pour deux colonnes sur des écrans moyens */
+  }
+}
+
+@media (max-width: 500px) {
+  li {
+    flex: 0 0 100%; /* Pleine largeur des cases pour une colonne sur des petits écrans */
+  }
+}
