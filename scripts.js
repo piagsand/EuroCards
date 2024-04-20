@@ -1,8 +1,24 @@
+// Initialisation des tableaux pour les cartes possédées, manquantes et en double
+
 let ownedCards = [];
 let missingCards = [];
 let duplicateCards = {};
 
-//Liste de toutes les cartes disponibles
+
+// Définition des cartes disponibles classées par groupes et pays
+/**
+ * Represents a collection of Euro cards.
+ * @typedef {Object} EuroCards
+ * @property {Object} "Euro Winner and hosts" - The Euro winner and hosts category.
+ * @property {Object} "Germany as host" - The Germany as host category.
+ * @property {Object} "Group A" - The Group A category.
+ * @property {Object} "Group B" - The Group B category.
+ * @property {Object} "Group C" - The Group C category.
+ * @property {Object} "Group D" - The Group D category.
+ * @property {Object} "Group E" - The Group E category.
+ * @property {Object} "Group F" - The Group F category.
+ * @property {Object} "EURO LEGEND" - The EURO LEGEND category.
+ */
 const euroCards = {
 
     "Euro Winner and hosts": {
@@ -72,14 +88,16 @@ const euroCards = {
         "Czechia": ["CZE-P1", "SCZECO-P2", "CZE-PTW", "CZE-SP", "CZE-TOP1", "CZE-TOP2", "CZE-1", "CZE-2", "CZE-3", "CZE-4", "CZE-5", "CZE-6", "CZE-7", "CZE-8", "CZE-9", "CZE-10", "CZE-11", "CZE-12", "CZE-13", "CZE-14", "CZE-15", "CZE-16", "CZE-17", "CZE-18", "CZE-19", "CZE-20", "CZE-21"],
     },
 
-
     "EURO LEGEND": {
         "EURO LEGEND": ["LEG-1", "LEG-2", "LEG-3", "LEG-4", "LEG-5", "LEG-6", "LEG-7", "LEG-8", "LEG-9", "LEG-10"]
     }
 }
 /* ******************************************************* */
-
-//Liste des pays
+// Liste des drapeaux des pays pour l'affichage dans l'interface utilisateur
+/**
+ * Object representing country flags and their corresponding image paths.
+ * @type {Object.<string, string>}
+ */
 const countryFlags = {
 
     "Germany": "./assets/img/de.svg", "Scotland": "./assets/img/gb-sct.svg",
@@ -99,20 +117,25 @@ const countryFlags = {
     "Luxembourg": "./assets/img/lu.svg", "Greece": "./assets/img/gr.svg",
     "Kazakhstan": "./assets/img/kz.svg", "Portugal": "./assets/img/pt.svg",
     "Czechia": "./assets/img/cz.svg"
-
-    /* ******************************************************* */
-
 };
 
-// Display data on startup using the DOM
+/* ******************************************************* */
+
+// Fonction pour afficher les groupes et les cartes dans l'interface utilisateur (DOM)
+/**
+ */
 function displayGroups() {
     const container = document.getElementById('groupsContainer');
+    // Création de la navigation principale pour les groupes
     const topNavigation = document.createElement('div');
     topNavigation.className = 'top-navigation';
     topNavigation.id = 'top-navigation';
     container.innerHTML = '';
 
+    // Boucle sur chaque groupe pour créer les éléments HTML correspondants
     Object.keys(euroCards).forEach(group => {
+        // Création des liens de navigation et des sections pour chaque groupee(/\s+/g, '-').toLowerCase()}`;
+
         const groupLinkId = `group-${group.replace(/\s+/g, '-').toLowerCase()}`;
         const navLink = document.createElement('a');
         navLink.href = `#${groupLinkId}`;
@@ -174,6 +197,7 @@ function displayGroups() {
             countryHeader.appendChild(document.createTextNode(country));
             countryDiv.appendChild(countryHeader);
 
+            // Création des liens de navigation et des sections pour chaque groupe
             const cardsList = document.createElement('ul');
             cardsList.className = 'cards-missing-list';
 
@@ -210,7 +234,7 @@ function displayGroups() {
     container.insertBefore(topNavigation, container.firstChild);
 }
 
-// Functions that execute on load
+// Fonction appelée au chargement de la page pour initialiser l'affichage
 onload = function () {
     displayGroups();
     updateList('missingCards', missingCards);
@@ -228,21 +252,23 @@ Object.values(euroCards).forEach(group => {
     });
 });
 
-// Function to add cards
+// Fonction pour ajouter des cartes aux listes de cartes possédées ou en double
 function addCards() {
     const cardInput = document.getElementById('cardInput');
     const cardNumbers = cardInput.value.split(',')
         .map(card => card.trim().toUpperCase().replace(/[^A-Z0-9-]/g, ''))
         .map(card => card.replace(/^([A-Z]+)(\d+)$/, '$1-$2')); // Transforme "SUI1" en "SUI-1"
     cardInput.value = '';
-
+    // Traitement des entrées pour standardiser les numéros de cartes
     let addedCards = [];
     let duplicateCardsNotif = [];
     let invalidCards = [];
 
+    // Vérification de la validité des cartes et mise à jour des listes
     cardNumbers.forEach(cardNumber => {
         if (!cardNumber) return;
         if (isCardValid(cardNumber)) {
+            // Logique pour gérer les cartes possédées et en double
             const index = missingCards.indexOf(cardNumber);
             if (ownedCards.includes(cardNumber)) {
                 duplicateCards[cardNumber] = (duplicateCards[cardNumber] || 0) + 1;
@@ -252,10 +278,12 @@ function addCards() {
                 addedCards.push(cardNumber);
                 if (index !== -1) missingCards.splice(index, 1);
             }
-        } else {
+        } else { // Gestion des cartes invalides
             invalidCards.push(cardNumber);
         }
     });
+
+    // Mise à jour des affichages des listes
 
     updateList('missingCards', missingCards);
     updateList('ownedCards', ownedCards);
@@ -263,10 +291,12 @@ function addCards() {
     displayMessage(addedCards, duplicateCardsNotif, invalidCards);
 }
 
+// Fonction pour valider si un numéro de carte est valide
 function isCardValid(cardNumber) {
     return validCards.has(cardNumber);
 }
 
+// Fonction pour afficher des messages en fonction des actions de l'utilisateur
 function displayMessage(addedCards, duplicateCards, invalidCards) {
     const messageElement = document.getElementById('message');
     let messages = [];
@@ -286,17 +316,20 @@ function displayMessage(addedCards, duplicateCards, invalidCards) {
         messages.push(message + invalidCards.join(', '));
     }
 
+    // Continuer pour les cartes en double et invalides...
     messageElement.innerHTML = messages.map(message => {
         const color = message.startsWith('Carte invalide') ? 'red' : 'green';
         return `<p style="color: ${color};">${message}</p>`;
     }).join('');
 }
 
-
+// Fonction pour mettre à jour les listes affichées dans l'interface utilisateur
 function updateList(listId, items) {
     const list = document.getElementById(listId);
+
     list.innerHTML = '';
 
+    // Ajout des éléments à la liste avec des cases à cocher
     if (Array.isArray(items)) {
         items.forEach(item => {
             const listItem = createListItemWithCheckbox(item, null);
@@ -312,7 +345,7 @@ function updateList(listId, items) {
         return;
     }
 }
-
+// Fonction pour créer un élément de liste avec une case à cocher
 function createListItemWithCheckbox(key, count) {
     const listItem = document.createElement('li');
     const checkbox = createCheckbox(key);
@@ -334,6 +367,9 @@ function createListItemWithCheckbox(key, count) {
     return listItem;
 }
 
+
+
+// Fonction pour créer une case à cocher
 function createCheckbox(value) {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -428,7 +464,6 @@ function markGivenCards() {
     displayFeedback(processedCards, removedCards);
 }
 
-
 function markCheckedAsGiven() {
     const checkboxes = document.querySelectorAll('#duplicateCards input[type="checkbox"]:checked');
     let processedCards = [];
@@ -463,7 +498,7 @@ function displayFeedback(processedCards, removedCards) {
     messageElement.textContent = message;
 }
 
-
+//exportDataToJson : permet à l'utilisateur d'exporter ses données de cartes en format JSON.
 function exportDataToJson() {
     const data = {
         ownedCards: ownedCards,
@@ -479,6 +514,8 @@ function exportDataToJson() {
     downloadAnchorNode.remove();
 }
 
+
+//mportDataFromJson : permet à l'utilisateur d'importer des données de cartes à partir d'un fichier JSON.
 function importDataFromJson(event) {
     const fileReader = new FileReader();
     fileReader.onload = function (e) {

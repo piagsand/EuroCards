@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestion des cartes Euro 2024 de Topps</title>
-    <link rel="stylesheet" href="styleFoot3.css" />
+    <link rel="stylesheet" href="style_Foot.css" />
   </head>
   <body>
     <header>
@@ -21,11 +21,8 @@
     <h1>Gestionnaire de cartes Euro 2024 de Topps</h1>
 
     <section>
-      <input
-        type="text"
-        id="cardInput"
-        placeholder="Entrez les numéros de carte, séparés par des virgules (ex: CH-1, CH-2, CH2-3)"
-      />
+      <p>Entrez les numéros de carte, séparés par des virgules.</p>
+      <input type="text" id="cardInput" placeholder="Ex: CH-1, CH-2, CH2-3" />
       <button onclick="addCards()">Ajouter les Cartes</button>
       <div id="message"></div>
       <button onclick="moveSelectedToOwned()">
@@ -48,7 +45,7 @@
     <section>
       <h2 class="typeOfCards" id="cards-duplicate">Doubles</h2>
       <ul id="duplicateCards"></ul>
-      <input type="text" id="givenInput" placeholder="Ex: 005, 123, 156" />
+      <input type="text" id="givenInput" placeholder="Ex: SUI-1, SUI2, sui-3" />
       <button onclick="markGivenCards()">Enlever double</button>
       <div id="messageDouble"></div>
 

@@ -8,26 +8,19 @@ body {
   padding: 20px;
 }
 
+p {
+  font-size: 0.9rem;
+  color: rgb(15, 69, 162);
+  margin: 0;
+}
 /* -------------------------------------------------- */
 
 /* Styles pour les listes de cartes */
-.cards-missing-list-1 dul {
+.cards-missing-list-1 ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
   padding: 0;
   list-style-type: none;
-}
-
-.cards-missing-list-1 li {
-  background-color: #ffffff; /* blanc pour les éléments de liste, clair et simple */
-  border: 1px solid #b0c4de; /* bordure légèrement bleue */
-  border-radius: 5px;
-  margin: 10px;
-  padding: 10px;
-  width: calc(10% - 20px); /* ajustement pour trois colonnes */
-  box-sizing: border-box;
-  cursor: pointer;
 }
 
 /* Amélioration des cases à cocher pour mieux s'aligner avec le thème */
@@ -74,7 +67,7 @@ input[type="checkbox"] {
 .nav-bar ul {
   display: flex;
   align-items: center;
-  justify-content: center; /* Centrage des éléments de la liste */
+  /* justify-content: center; Centrage des éléments de la liste */
   margin: -20px;
   padding: 0;
 
@@ -141,15 +134,17 @@ input[type="checkbox"] {
 /* -------------------------------------------------- */
 /* Styles pour les listes de cartes */
 
+/* Style pour La liste UL */
 .cards-missing-list,
 #ownedCards,
 #duplicateCards {
   list-style-type: none;
   display: flex;
+  flex-direction: start;
   flex-wrap: wrap;
 }
 
-.cards-missing-list-1,
+.cards-missing-list-item,
 #ownedCards li,
 #duplicateCards li {
   cursor: pointer;
@@ -161,7 +156,7 @@ input[type="checkbox"] {
 }
 
 /* Interaction au survol pour les éléments de liste */
-.cards-missing-list-1:hover,
+.cards-missing-list-item:hover,
 #ownedCards li:hover,
 #duplicateCards li:hover {
   background-color: #f4f6f6; /* Changement de couleur au survol */
@@ -172,10 +167,6 @@ input[type="checkbox"] {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-cardItem input[type="checkbox"] {
-  cursor: pointer;
 }
 
 /* -------------------------------------------------- */
@@ -217,13 +208,13 @@ cardItem input[type="checkbox"] {
 }
 /* -------------------------------------------------- */
 
-cardItem li {
+li.cardItem {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-cardItem input[type="checkbox"] {
+li.cardItem input[type="checkbox"] {
   cursor: pointer;
 }
 
@@ -299,9 +290,11 @@ button:hover {
 
 /* Styles pour les entrées de texte */
 input[type="text"] {
+  display: inline-block;
+  height: 40px;
   padding: 10px;
   margin: 10px 0;
-  width: 100%;
+  width: 80%;
   box-sizing: border-box;
   border: 1px solid #d0d7de;
   border-radius: 8px;
@@ -313,26 +306,51 @@ input[type="text"]:focus {
 }
 /* -------------------------------------------------- */
 
-/* -------------------------------------------------- */
-
 /* Adaptations pour les tablettes */
 @media (max-width: 768px) {
   .top-navigation,
   .navbar {
-    justify-content: start;
+    justify-content: row;
   }
 
   .top-navigation a,
   .navbar a {
     font-size: 0.8rem; /* Réduire la taille du texte pour les appareils plus petits */
   }
+
+  .cards-missing-list-item,
+  #ownedCards li,
+  #duplicateCards li {
+    background-color: #1e3c88db;
+    display: inline;
+    width: 20%;
+    text-align: center;
+  }
+  .cards-missing-list li {
+    margin: 0;
+    padding: 5px;
+    gap: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    /* box-shadow: 1px 1px 1px black; */
+    display: block;
+  }
+
+  .cards-missing-list li:hover {
+    background: #145214;
+  }
 }
 
+/* -------------------------------------------------- */
 /* Adaptations pour les mobiles */
 @media (max-width: 480px) {
   .top-navigation,
   nav-bar {
-    flex-direction: column; /* Les liens s'affichent en colonne sur les petits écrans */
+    flex-direction: column; /*  Les liens s'affichent en colonne sur les petits écrans */
     align-items: center;
   }
 
