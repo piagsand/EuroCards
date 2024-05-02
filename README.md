@@ -1,11 +1,18 @@
 # Paxalom-uefa
- 
+
+## todo
+
+- vérifier la fonction qui ajoute les cartes, si on ne mets pas la bonne carte.. problème.
+- pourquoi y a t'il la 2ème liste missing_cards
+
 The code snippet is a JavaScript function that manages a collection of football cards for the UEFA Euro tournament. It allows users to add cards to their collection, mark cards as duplicates, and mark cards as given to others. The function also provides a way to export and import the card data in JSON format.
 
-## Inputs 
+## Inputs
+
 The function takes input from the user through various HTML elements, such as text inputs and checkboxes. The user can enter card numbers, select checkboxes to mark cards, and upload JSON files to import card data.
 
 ## Flow
+
 The function starts by defining an empty array for owned cards, an empty array for missing cards, and an empty object for duplicate cards.
 It then defines a constant variable euroCards that contains a nested object structure representing the available cards for each group in the tournament.
 The function displayGroups is called to render the card groups and countries on the webpage.
@@ -21,10 +28,13 @@ The function importDataFromJson is called when the user selects a JSON file to i
 The function markGivenCards is called when the user clicks a button to mark given cards as duplicates. It updates the duplicate cards object based on the user's input.
 The function markCheckedAsGiven is called when the user clicks a button to mark selected duplicate cards as given. It updates the duplicate cards object and removes the corresponding checkboxes.
 The function displayFeedback is called to display feedback messages to the user after marking cards as given or removing duplicate cards.
+
 ## Outputs
+
 The function updates the HTML lists of owned, missing, and duplicate cards based on the user's actions. It also displays feedback messages to the user after adding cards, marking cards as given, or removing duplicate cards.
 
 ## Usage example
+
 // Add cards to the collection
 addCards();
 
