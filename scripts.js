@@ -34,7 +34,7 @@ const euroCards = {
 
         "Germany": ["GER-P1", "GER-P2", "GER-PTW", "GER-SP", "GER-TOP1", "GER-TOP2", "GER-1", "GER-2", "GER-3", "GER-4", "GER-5", "GER-6", "GER-7", "GER-8", "GER-9", "GER-10", "GER-11", "GER-12", "GER-13", "GER-14", "GER-15", "GER-16", "GER-17", "GER-18", "GER-19", "GER-20", "GER-21"],
         "Scotland": ["SCO-P1", "SCO-P2", "SCO-PTW", "SCO-SP", "SCO-TOP1", "SCO-TOP2", "SCO-1", "SCO-2", "SCO-3", "SCO-4", "SCO-5", "SCO-6", "SCO-7", "SCO-8", "SCO-9", "SCO-10", "SCO-11", "SCO-12", "SCO-13", "SCO-14", "SCO-15", "SCO-16", "SCO-17", "SCO-18", "SCO-19", "SCO-20", "SCO-21"],
-        "Hungary": ["HUN-P1", "HUN-P2", "SCO-PTW", "HUN-SP", "HUN-TOP1", "HUN-TOP2", "HUN-1", "HUN-2", "HUN-3", "HUN-4", "HUN-5", "HUN-6", "HUN-7", "HUN-8", "HUN-9", "HUN-10", "H-11UN-11", "HUN-12", "HUN-13", "HUN-14", "HUN-15", "HUN-16", "HUN-17", "HUN-18", "HUN-19", "HUN-20", "HUN-21"],
+        "Hungary": ["HUN-P1", "HUN-P2", "HUN-PTW", "HUN-SP", "HUN-TOP1", "HUN-TOP2", "HUN-1", "HUN-2", "HUN-3", "HUN-4", "HUN-5", "HUN-6", "HUN-7", "HUN-8", "HUN-9", "HUN-10", "HUN-11", "HUN-12", "HUN-13", "HUN-14", "HUN-15", "HUN-16", "HUN-17", "HUN-18", "HUN-19", "HUN-20", "HUN-21"],
         "Switzerland": ["SUI-P1", "SUI-P2", "SUI-PTW", "SUI-SP", "SUI-TOP1", "SUI-TOP2", "SUI-1", "SUI-2", "SUI-3", "SUI-4", "SUI-5", "SUI-6", "SUI-7", "SUI-8", "SUI-9", "SUI-10", "SUI-11", "SUI-12", "SUI-13", "SUI-14", "SUI-15", "SUI-16", "SUI-17", "SUI-18", "SUI-19", "SUI-20", "SUI-21"]
     },
 
@@ -51,8 +51,9 @@ const euroCards = {
         "Special": ["GC-1", "GC-2"],
         "Slovenia": ["SVN-P1", "SVN-P2", "SVN-PTW", "SVN-SP", "SVN-TOP1", "SVN-TOP2", "SVN-1", "SVN-2", "SVN-3", "SVN-4", "SVN-5", "SVN-6", "SVN-7", "SVN-8", "SVN-9", "SVN-10", "SVN-11", "SVN-12", "SVN-13", "SVN-14", "SVN-15", "SVN-16", "SVN-17", "SVN-18", "SVN-19", "SVN-20", "SVN-21"],
         "Denmark": ["DEN-P1", "DEN-P2", "DEN-PTW", "DEN-SP", "DEN-TOP1", "DEN-TOP2", "DEN-1", "DEN-2", "DEN-3", "DEN-4", "DEN-5", "DEN-6", "DEN-7", "DEN-8", "DEN-9", "DEN-10", "DEN-11", "DEN-12", "DEN-13", "DEN-14", "DEN-15", "DEN-16", "DEN-17", "DEN-18", "DEN-19", "DEN-20", "DEN-21"],
-        "Serbia": ["SRB-P1", "SRB-P2", "SRB-PTW", "SRB-SP", "SSRBCO-TOP1", "SRB-TOP2", "SRB-1", "SRB-2", "SRB-3", "SRB-4", "SRB-5", "SRB-6", "SRB-7", "SRB-8", "SRB-9", "SRB-10", "SRB-11", "SRB-12", "SRB-13", "SRB-14", "SRB-15", "SRB-16", "SRB-17", "SRB-18", "SRB-19", "SRB-20", "SRB-21"],
-        "England": ["ENG-P1", "SCENGO-P2", "ENG-PTW", "ENG-SP", "ENG-TOP1", "ENG-TOP2", "ENG-1", "ENG-2", "ENG-3", "ENG-4", "ENG-5", "ENG-6", "ENG-7", "SCO-P1", "SCO-P2", "SCO-PTW", "SCO-SP", "SCO-TOP1", "SCO-TOP2", "ENG-8", "ENG-9", "ENG-10", "ENG-11", "ENG-12", "ENG-13", "ENG-14", "ENG-15", "ENG-16", "ENG-17", "ENG-18", "ENG-19", "ENG-20", "ENG-21"]
+        "Serbia": ["SRB-P1", "SRB-P2", "SRB-PTW", "SRB-SP", "SRB-TOP1", "SRB-TOP2", "SRB-1", "SRB-2", "SRB-3", "SRB-4", "SRB-5", "SRB-6", "SRB-7", "SRB-8", "SRB-9", "SRB-10", "SRB-11", "SRB-12", "SRB-13", "SRB-14", "SRB-15", "SRB-16", "SRB-17", "SRB-18", "SRB-19", "SRB-20", "SRB-21"],
+        "England": ["ENG-P1", "ENG-P2", "ENG-PTW", "ENG-SP", "ENG-TOP1", "ENG-TOP2", "ENG-1", "ENG-2", "ENG-3", "ENG-4", "ENG-5", "ENG-6", "ENG-7", "ENG-8", "ENG-9", "ENG-10", "ENG-11", "ENG-12", "ENG-13", "ENG-14", "ENG-15", "ENG-16", "ENG-17", "ENG-18", "ENG-19", "ENG-20", "ENG-21"],
+        "Special": ["MM-1", "MM-2"],
     },
 
     "Group D": {
@@ -83,7 +84,7 @@ const euroCards = {
         "Georgia": ["GEO-1", "GEO-2", "GEO-3", "GEO-4", "GEO-5", "GEO-6", "GEO-7", "GEO-8", "GEO-9", "GEO-10", "GEO-11", "GEO-12", "GEO-13", "GEO-14", "GEO-15"],
         "Luxembourg": ["LUX-1", "LUX-2", "LUX-3", "LUX-4", "LUX-5", "LUX-6", "LUX-7", "LUX-8", "LUX-9", "LUX-10", "LUX-11", "LUX-12", "LUX-13", "LUX-14", "LUX-15"],
         "Greece": ["GREC-1", "GREC-2", "GREC-3", "GREC-4", "GREC-5", "GREC-6", "GREC-7", "GREC-8", "GREC-9", "GREC-10", "GREC-11", "GREC-12", "GREC-13", "GREC-14", "GREC-15"],
-        "Kazakhstan": ["KAZ-1", "KAZ-2", "KAZ-3", "KAZ-4", "KAZ-5", "KAZ-6", "KAZ-7", "KAZ-8", "KAZ-9", "KAZ-10", "KAZ-11", "KAZ-12", "KAZ-13", "KAZ-14"],
+        "Kazakhstan": ["KAZ-1", "KAZ-2", "KAZ-3", "KAZ-4", "KAZ-5", "KAZ-6", "KAZ-7", "KAZ-8", "KAZ-9", "KAZ-10", "KAZ-11", "KAZ-12", "KAZ-13", "KAZ-14", "KAZ-15"],
         "Portugal": ["POR-P1", "POR-P2", "POR-PTW", "POR-SP", "POR-TOP1", "POR-TOP2", "POR-1", "POR-2", "POR-3", "POR-4", "POR-5", "POR-6", "POR-7", "POR-8", "POR-9", "POR-10", "POR-11", "POR-12", "POR-13", "POR-14", "POR-15", "POR-16", "POR-17", "POR-18", "POR-19", "POR-20", "POR-21"],
         "Czechia": ["CZE-P1", "SCZECO-P2", "CZE-PTW", "CZE-SP", "CZE-TOP1", "CZE-TOP2", "CZE-1", "CZE-2", "CZE-3", "CZE-4", "CZE-5", "CZE-6", "CZE-7", "CZE-8", "CZE-9", "CZE-10", "CZE-11", "CZE-12", "CZE-13", "CZE-14", "CZE-15", "CZE-16", "CZE-17", "CZE-18", "CZE-19", "CZE-20", "CZE-21"],
     },
