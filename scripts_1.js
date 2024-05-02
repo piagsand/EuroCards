@@ -1,19 +1,26 @@
-
-// Exécution au chargement de la page
-onload = function () {
-    displayGroups();
-    updateList('missingCards', missingCards);
-    updateList('ownedCards', ownedCards);
-    updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
-}
+// Initialisation des tableaux pour les cartes possédées, manquantes et en double
 
 let ownedCards = [];
 let missingCards = [];
 let duplicateCards = {};
 
-/* ******************************************************* */
-//Liste de toutes les cartes disponibles 
+
+// Définition des cartes disponibles classées par groupes et pays
+/**
+ * Represents a collection of Euro cards.
+ * @typedef {Object} EuroCards
+ * @property {Object} "Euro Winner and hosts" - The Euro winner and hosts category.
+ * @property {Object} "Germany as host" - The Germany as host category.
+ * @property {Object} "Group A" - The Group A category.
+ * @property {Object} "Group B" - The Group B category.
+ * @property {Object} "Group C" - The Group C category.
+ * @property {Object} "Group D" - The Group D category.
+ * @property {Object} "Group E" - The Group E category.
+ * @property {Object} "Group F" - The Group F category.
+ * @property {Object} "EURO LEGEND" - The EURO LEGEND category.
+ */
 const euroCards = {
+
     "Euro Winner and hosts": {
         "UEFA": ["TOPPS-1", "UEFA-1", "UEFA-2", "UEFA-3"]
     },
@@ -27,7 +34,7 @@ const euroCards = {
 
         "Germany": ["GER-P1", "GER-P2", "GER-PTW", "GER-SP", "GER-TOP1", "GER-TOP2", "GER-1", "GER-2", "GER-3", "GER-4", "GER-5", "GER-6", "GER-7", "GER-8", "GER-9", "GER-10", "GER-11", "GER-12", "GER-13", "GER-14", "GER-15", "GER-16", "GER-17", "GER-18", "GER-19", "GER-20", "GER-21"],
         "Scotland": ["SCO-P1", "SCO-P2", "SCO-PTW", "SCO-SP", "SCO-TOP1", "SCO-TOP2", "SCO-1", "SCO-2", "SCO-3", "SCO-4", "SCO-5", "SCO-6", "SCO-7", "SCO-8", "SCO-9", "SCO-10", "SCO-11", "SCO-12", "SCO-13", "SCO-14", "SCO-15", "SCO-16", "SCO-17", "SCO-18", "SCO-19", "SCO-20", "SCO-21"],
-        "Hungary": ["HUN-P1", "HUN-P2", "SCO-PTW", "HUN-SP", "HUN-TOP1", "HUN-TOP2", "HUN-1", "HUN-2", "HUN-3", "HUN-4", "HUN-5", "HUN-6", "HUN-7", "HUN-8", "HUN-9", "HUN-10", "HUN-11", "HUN-12", "HUN-13", "HUN-14", "HUN-15", "HUN-16", "HUN-17", "HUN-18", "HUN-19", "HUN-20", "HUN-21"],
+        "Hungary": ["HUN-P1", "HUN-P2", "HUN-PTW", "HUN-SP", "HUN-TOP1", "HUN-TOP2", "HUN-1", "HUN-2", "HUN-3", "HUN-4", "HUN-5", "HUN-6", "HUN-7", "HUN-8", "HUN-9", "HUN-10", "HUN-11", "HUN-12", "HUN-13", "HUN-14", "HUN-15", "HUN-16", "HUN-17", "HUN-18", "HUN-19", "HUN-20", "HUN-21"],
         "Switzerland": ["SUI-P1", "SUI-P2", "SUI-PTW", "SUI-SP", "SUI-TOP1", "SUI-TOP2", "SUI-1", "SUI-2", "SUI-3", "SUI-4", "SUI-5", "SUI-6", "SUI-7", "SUI-8", "SUI-9", "SUI-10", "SUI-11", "SUI-12", "SUI-13", "SUI-14", "SUI-15", "SUI-16", "SUI-17", "SUI-18", "SUI-19", "SUI-20", "SUI-21"]
     },
 
@@ -45,7 +52,8 @@ const euroCards = {
         "Slovenia": ["SVN-P1", "SVN-P2", "SVN-PTW", "SVN-SP", "SVN-TOP1", "SVN-TOP2", "SVN-1", "SVN-2", "SVN-3", "SVN-4", "SVN-5", "SVN-6", "SVN-7", "SVN-8", "SVN-9", "SVN-10", "SVN-11", "SVN-12", "SVN-13", "SVN-14", "SVN-15", "SVN-16", "SVN-17", "SVN-18", "SVN-19", "SVN-20", "SVN-21"],
         "Denmark": ["DEN-P1", "DEN-P2", "DEN-PTW", "DEN-SP", "DEN-TOP1", "DEN-TOP2", "DEN-1", "DEN-2", "DEN-3", "DEN-4", "DEN-5", "DEN-6", "DEN-7", "DEN-8", "DEN-9", "DEN-10", "DEN-11", "DEN-12", "DEN-13", "DEN-14", "DEN-15", "DEN-16", "DEN-17", "DEN-18", "DEN-19", "DEN-20", "DEN-21"],
         "Serbia": ["SRB-P1", "SRB-P2", "SRB-PTW", "SRB-SP", "SRB-TOP1", "SRB-TOP2", "SRB-1", "SRB-2", "SRB-3", "SRB-4", "SRB-5", "SRB-6", "SRB-7", "SRB-8", "SRB-9", "SRB-10", "SRB-11", "SRB-12", "SRB-13", "SRB-14", "SRB-15", "SRB-16", "SRB-17", "SRB-18", "SRB-19", "SRB-20", "SRB-21"],
-        "England": ["ENG-P1", "ENG-P2", "ENG-PTW", "ENG-SP", "ENG-TOP1", "ENG-TOP2", "ENG-1", "ENG-2", "ENG-3", "ENG-4", "ENG-5", "ENG-6", "ENG-7", "SCO-P1", "SCO-P2", "SCO-PTW", "SCO-SP", "SCO-TOP1", "SCO-TOP2", "ENG-8", "ENG-9", "ENG-10", "ENG-11", "ENG-12", "ENG-13", "ENG-14", "ENG-15", "ENG-16", "ENG-17", "ENG-18", "ENG-19", "ENG-20", "ENG-21"]
+        "England": ["ENG-P1", "ENG-P2", "ENG-PTW", "ENG-SP", "ENG-TOP1", "ENG-TOP2", "ENG-1", "ENG-2", "ENG-3", "ENG-4", "ENG-5", "ENG-6", "ENG-7", "ENG-8", "ENG-9", "ENG-10", "ENG-11", "ENG-12", "ENG-13", "ENG-14", "ENG-15", "ENG-16", "ENG-17", "ENG-18", "ENG-19", "ENG-20", "ENG-21"],
+        "Special": ["MM-1", "MM-2"],
     },
 
     "Group D": {
@@ -76,7 +84,7 @@ const euroCards = {
         "Georgia": ["GEO-1", "GEO-2", "GEO-3", "GEO-4", "GEO-5", "GEO-6", "GEO-7", "GEO-8", "GEO-9", "GEO-10", "GEO-11", "GEO-12", "GEO-13", "GEO-14", "GEO-15"],
         "Luxembourg": ["LUX-1", "LUX-2", "LUX-3", "LUX-4", "LUX-5", "LUX-6", "LUX-7", "LUX-8", "LUX-9", "LUX-10", "LUX-11", "LUX-12", "LUX-13", "LUX-14", "LUX-15"],
         "Greece": ["GREC-1", "GREC-2", "GREC-3", "GREC-4", "GREC-5", "GREC-6", "GREC-7", "GREC-8", "GREC-9", "GREC-10", "GREC-11", "GREC-12", "GREC-13", "GREC-14", "GREC-15"],
-        "Kazakhstan": ["KAZ-1", "KAZ-2", "KAZ-3", "KAZ-4", "KAZ-5", "KAZ-6", "KAZ-7", "KAZ-8", "KAZ-9", "KAZ-10", "KAZ-11", "KAZ-12", "KAZ-13", "KAZ-14"],
+        "Kazakhstan": ["KAZ-1", "KAZ-2", "KAZ-3", "KAZ-4", "KAZ-5", "KAZ-6", "KAZ-7", "KAZ-8", "KAZ-9", "KAZ-10", "KAZ-11", "KAZ-12", "KAZ-13", "KAZ-14", "KAZ-15"],
         "Portugal": ["POR-P1", "POR-P2", "POR-PTW", "POR-SP", "POR-TOP1", "POR-TOP2", "POR-1", "POR-2", "POR-3", "POR-4", "POR-5", "POR-6", "POR-7", "POR-8", "POR-9", "POR-10", "POR-11", "POR-12", "POR-13", "POR-14", "POR-15", "POR-16", "POR-17", "POR-18", "POR-19", "POR-20", "POR-21"],
         "Czechia": ["CZE-P1", "SCZECO-P2", "CZE-PTW", "CZE-SP", "CZE-TOP1", "CZE-TOP2", "CZE-1", "CZE-2", "CZE-3", "CZE-4", "CZE-5", "CZE-6", "CZE-7", "CZE-8", "CZE-9", "CZE-10", "CZE-11", "CZE-12", "CZE-13", "CZE-14", "CZE-15", "CZE-16", "CZE-17", "CZE-18", "CZE-19", "CZE-20", "CZE-21"],
     },
@@ -86,8 +94,11 @@ const euroCards = {
     }
 }
 /* ******************************************************* */
-
-//Liste des pays
+// Liste des drapeaux des pays pour l'affichage dans l'interface utilisateur
+/**
+ * Object representing country flags and their corresponding image paths.
+ * @type {Object.<string, string>}
+ */
 const countryFlags = {
 
     "Germany": "./assets/img/de.svg", "Scotland": "./assets/img/gb-sct.svg",
@@ -108,21 +119,24 @@ const countryFlags = {
     "Kazakhstan": "./assets/img/kz.svg", "Portugal": "./assets/img/pt.svg",
     "Czechia": "./assets/img/cz.svg"
 };
+
 /* ******************************************************* */
 
-//Affiche les données au démarrage en utilisant le DOM
-/*cette fonction organise et affiche une structure complexe de données (groupes, pays, cartes) de manière interactive, 
-en utilisant des éléments HTML dynamiquement générés et manipulés via JavaScript. */
-
+// Fonction pour afficher les groupes et les cartes dans l'interface utilisateur (DOM)
+/**
+ */
 function displayGroups() {
     const container = document.getElementById('groupsContainer');
+    // Création de la navigation principale pour les groupes
     const topNavigation = document.createElement('div');
-
     topNavigation.className = 'top-navigation';
     topNavigation.id = 'top-navigation';
     container.innerHTML = '';
 
+    // Boucle sur chaque groupe pour créer les éléments HTML correspondants
     Object.keys(euroCards).forEach(group => {
+        // Création des liens de navigation et des sections pour chaque groupee(/\s+/g, '-').toLowerCase()}`;
+
         const groupLinkId = `group-${group.replace(/\s+/g, '-').toLowerCase()}`;
         const navLink = document.createElement('a');
         navLink.href = `#${groupLinkId}`;
@@ -133,14 +147,11 @@ function displayGroups() {
         groupDiv.id = groupLinkId;
 
         const groupHeaderContainer = document.createElement('div');
-        groupHeaderContainer.style.display = 'flex';
-        groupHeaderContainer.style.alignItems = 'center';
-        groupHeaderContainer.style.justifyContent = 'center';
+        groupHeaderContainer.className = 'group-header-container';
 
         const groupHeader = document.createElement('h2');
         groupHeader.textContent = group;
         groupHeader.className = "countries";
-
         groupHeader.onclick = () => {
             document.getElementById('top-navigation').scrollIntoView({ behavior: 'smooth' });
         };
@@ -148,7 +159,6 @@ function displayGroups() {
 
         const flagsContainer = document.createElement('div');
         flagsContainer.className = 'flags-container';
-        flagsContainer.style.marginLeft = '10px';
 
         const countriesDiv = document.createElement('div');
 
@@ -188,31 +198,28 @@ function displayGroups() {
             countryHeader.appendChild(document.createTextNode(country));
             countryDiv.appendChild(countryHeader);
 
+            // Création des liens de navigation et des sections pour chaque groupe
             const cardsList = document.createElement('ul');
             cardsList.className = 'cards-missing-list';
 
             euroCards[group][country].forEach(card => {
-                if (!ownedCards.includes(card)) {
-                    const cardItem = document.createElement('li');
-                    cardItem.className = 'cards-missing-list-1';
+                const cardItem = document.createElement('li');
+                cardItem.className = 'cards-missing-list-item';
 
-                    cardItem.style.cursor = 'pointer';
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = card;
+                checkbox.name = card;
 
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.value = card;
-                    checkbox.name = card;
+                checkbox.addEventListener('click', (e) => e.stopPropagation());
 
-                    checkbox.addEventListener('click', (e) => e.stopPropagation());
+                cardItem.appendChild(checkbox);
+                cardItem.appendChild(document.createTextNode(card));
+                cardItem.addEventListener('click', () => {
+                    checkbox.checked = !checkbox.checked;
+                });
 
-                    cardItem.appendChild(checkbox);
-                    cardItem.appendChild(document.createTextNode(card));
-                    cardItem.addEventListener('click', () => {
-                        checkbox.checked = !checkbox.checked;
-                    });
-
-                    cardsList.appendChild(cardItem);
-                }
+                cardsList.appendChild(cardItem);
             });
 
             countryDiv.appendChild(cardsList);
@@ -228,18 +235,41 @@ function displayGroups() {
     container.insertBefore(topNavigation, container.firstChild);
 }
 
+// Fonction appelée au chargement de la page pour initialiser l'affichage
+onload = function () {
+    displayGroups();
+    updateList('missingCards', missingCards);
+    updateList('ownedCards', ownedCards);
+    updateList('duplicateCards', duplicateCards);
+};
+
+let validCards = new Set();
+
+Object.values(euroCards).forEach(group => {
+    Object.values(group).forEach(country => {
+        country.forEach(card => {
+            validCards.add(card);
+        });
+    });
+});
+
+// Fonction pour ajouter des cartes aux listes de cartes possédées ou en double
 function addCards() {
     const cardInput = document.getElementById('cardInput');
-    const cardNumbers = cardInput.value.split(',').map(card => card.trim().toUpperCase());
+    const cardNumbers = cardInput.value.split(',')
+        .map(card => card.trim().toUpperCase().replace(/[^A-Z0-9-]/g, ''))
+        .map(card => card.replace(/^([A-Z]+)(\d+)$/, '$1-$2')); // Transforme "SUI1" en "SUI-1"
     cardInput.value = '';
-
+    // Traitement des entrées pour standardiser les numéros de cartes
     let addedCards = [];
     let duplicateCardsNotif = [];
     let invalidCards = [];
 
+    // Vérification de la validité des cartes et mise à jour des listes
     cardNumbers.forEach(cardNumber => {
         if (!cardNumber) return;
         if (isCardValid(cardNumber)) {
+            // Logique pour gérer les cartes possédées et en double
             const index = missingCards.indexOf(cardNumber);
             if (ownedCards.includes(cardNumber)) {
                 duplicateCards[cardNumber] = (duplicateCards[cardNumber] || 0) + 1;
@@ -249,78 +279,58 @@ function addCards() {
                 addedCards.push(cardNumber);
                 if (index !== -1) missingCards.splice(index, 1);
             }
-        } else {
+        } else { // Gestion des cartes invalides
             invalidCards.push(cardNumber);
         }
     });
+
+    // Mise à jour des affichages des listes
 
     updateList('missingCards', missingCards);
     updateList('ownedCards', ownedCards);
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
     displayMessage(addedCards, duplicateCardsNotif, invalidCards);
-    displayGroups(); // Ajout de cette ligne pour rafraîchir l'affichage des groupes
-
-    console.log(duplicateCards);
 }
+
+// Fonction pour valider si un numéro de carte est valide
 function isCardValid(cardNumber) {
-    const validCards = new Set(Object.values(euroCards).flatMap(group => Object.values(group).flat()));
-
-    // Normalisation du numéro de la carte
-    const normalizedCardNumber = cardNumber.toUpperCase().replace(/[^A-Z0-9]/g, '').replace(/(\D)(\d)/g, '$1-$2');
-    return validCards.has(normalizedCardNumber);
+    return validCards.has(cardNumber);
 }
 
+// Fonction pour afficher des messages en fonction des actions de l'utilisateur
 function displayMessage(addedCards, duplicateCards, invalidCards) {
     const messageElement = document.getElementById('message');
     let messages = [];
 
     if (addedCards.length > 0) {
-        messages.push(`Les cartes suivantes ont été ajoutées : ${addedCards.join(', ')}`);
+        const message = addedCards.length === 1 ? 'Carte ajoutée : ' : 'Cartes ajoutées : ';
+        messages.push(message + addedCards.join(', '));
     }
 
     if (duplicateCards.length > 0) {
-        messages.push(`Les cartes suivantes existent déjà, elles ont été ajoutées dans les doubles : ${duplicateCards.join(', ')}`);
+        const message = duplicateCards.length === 1 ? 'Carte en double : ' : 'Cartes en double : ';
+        messages.push(message + duplicateCards.join(', '));
     }
 
     if (invalidCards.length > 0) {
-        messages.push(`Les cartes suivantes ne sont pas valides, veuillez vérifier : ${invalidCards.join(', ')}`);
+        const message = invalidCards.length === 1 ? 'Carte invalide : ' : 'Cartes invalides : ';
+        messages.push(message + invalidCards.join(', '));
     }
 
+    // Continuer pour les cartes en double et invalides...
     messageElement.innerHTML = messages.map(message => {
-        const color = message.startsWith('Les cartes suivantes ne sont pas valides') ? 'red' : 'green';
+        const color = message.startsWith('Carte invalide') ? 'red' : 'green';
         return `<p style="color: ${color};">${message}</p>`;
     }).join('');
 }
 
-function moveSelectedToOwned() {
-    const checkboxes = document.querySelectorAll('.cards-missing-list input[type="checkbox"]:checked');
-    checkboxes.forEach(checkbox => {
-        const cardNumber = checkbox.value;
-        if (!ownedCards.includes(cardNumber)) {
-            ownedCards.push(cardNumber);
-        }
-        const index = missingCards.indexOf(cardNumber);
-        if (index > -1) {
-            missingCards.splice(index, 1);
-        }
-        checkbox.parentElement.style.display = 'none';
-    });
-    updateList('ownedCards', ownedCards);
-    displayGroups(); // Mettre à jour l'affichage des cartes manquantes
-}
-
-
-function updateMissingCards() {
-    const allCards = Object.values(euroCards).flatMap(group =>
-        Object.values(group).flat()
-    );
-    missingCards = allCards.filter(card => !ownedCards.includes(card));
-    displayGroups(); // Mettre à jour l'affichage des cartes manquantes
-}
+// Fonction pour mettre à jour les listes affichées dans l'interface utilisateur
 function updateList(listId, items) {
     const list = document.getElementById(listId);
+
     list.innerHTML = '';
 
+    // Ajout des éléments à la liste avec des cases à cocher
     if (Array.isArray(items)) {
         items.forEach(item => {
             const listItem = createListItemWithCheckbox(item, null);
@@ -336,7 +346,7 @@ function updateList(listId, items) {
         return;
     }
 }
-
+// Fonction pour créer un élément de liste avec une case à cocher
 function createListItemWithCheckbox(key, count) {
     const listItem = document.createElement('li');
     const checkbox = createCheckbox(key);
@@ -358,13 +368,32 @@ function createListItemWithCheckbox(key, count) {
     return listItem;
 }
 
+
+
+// Fonction pour créer une case à cocher
 function createCheckbox(value) {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.value = value;
     return checkbox;
 }
-
+function moveSelectedToOwned() {
+    const checkboxes = document.querySelectorAll('#groupsContainer input[type="checkbox"]:checked');
+    checkboxes.forEach(checkbox => {
+        const cardNumber = checkbox.value;
+        if (!ownedCards.includes(cardNumber)) {
+            ownedCards.push(cardNumber);
+        }
+        const index = missingCards.indexOf(cardNumber);
+        if (index > -1) {
+            missingCards.splice(index, 1);
+        }
+        // Optionally, remove the element from the visual list
+        checkbox.parentElement.style.display = 'none';
+    });
+    updateList('ownedCards', ownedCards);
+    updateList('missingCards', missingCards);
+}
 function markAsDuplicate() {
     const checkboxes = document.querySelectorAll('#ownedCards input[type="checkbox"]:checked');
     checkboxes.forEach(checkbox => {
@@ -373,65 +402,91 @@ function markAsDuplicate() {
         checkbox.checked = false;
     });
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
-    updateMissingCards();
+}
+function markGivenCards_old() {
+    const givenInput = document.getElementById('givenInput');
+    const cardNumbers = givenInput.value.split(',').map(card => card.trim());
+    givenInput.value = '';
+
+    let processedCards = [];
+    let invalidCards = [];
+
+    cardNumbers.forEach(cardNumber => {
+        if (duplicateCards[cardNumber] && duplicateCards[cardNumber] > 0) {
+            duplicateCards[cardNumber] -= 1;
+            if (duplicateCards[cardNumber] === 0) {
+                delete duplicateCards[cardNumber];
+            }
+            processedCards.push(cardNumber);
+        } else {
+            invalidCards.push(cardNumber);
+        }
+    });
+
+    updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
+    displayFeedback(processedCards, invalidCards);
 }
 
+function standardizeCardNumber(cardNumber) {
+    return cardNumber.replace(/(\D+)(\d+)/, '$1-$2').toUpperCase();
+}
 
-//Fonction enlever double
 function markGivenCards() {
-    const checkboxes = document.querySelectorAll('#duplicateCards input[type="checkbox"]:checked');
+    const givenInput = document.getElementById('givenInput');
+    const cardNumbers = givenInput.value.split(',').map(card => standardizeCardNumber(card.trim()));
+    givenInput.value = '';
+
     let processedCards = [];
     let removedCards = [];
 
-    checkboxes.forEach(checkbox => {
-        const cardNumber = checkbox.value.trim().split(' ')[0]; // Modification ici
-        if (duplicateCards[cardNumber] > 1) {
+    cardNumbers.forEach(cardNumber => {
+        if (duplicateCards[cardNumber] && duplicateCards[cardNumber] > 0) {
             duplicateCards[cardNumber] -= 1;
-            processedCards.push(`${cardNumber} (${duplicateCards[cardNumber]}x)`);
+            if (duplicateCards[cardNumber] === 0) {
+                delete duplicateCards[cardNumber];
+                removedCards.push(cardNumber);
+                const listItem = document.querySelector(`#duplicateCards li input[value="${cardNumber}"]`);
+                if (listItem) {
+                    listItem.closest('li').remove();
+                }
+            } else {
+                processedCards.push(`${cardNumber} (${duplicateCards[cardNumber]}x)`);
+                const listItem = document.querySelector(`#duplicateCards li input[value="${cardNumber}"]`);
+                if (listItem) {
+                    listItem.nextSibling.nodeValue = ` ${cardNumber} (${duplicateCards[cardNumber]}x)`;
+                }
+            }
         } else {
-            delete duplicateCards[cardNumber];
             removedCards.push(cardNumber);
-            checkbox.closest('li').remove();
         }
     });
+
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
-    displayFeedback(processedCards, removedCards, 'messageDouble');
+    displayFeedback(processedCards, removedCards);
 }
 
-
-
-function displayFeedback(processedCards, cards, elementId) {
-    const messageElement = document.getElementById('messageDouble');
-    let message = '';
-    if (processedCards.length > 0) {
-        message += `Traitées : ${processedCards.join(', ')}. `;
-    }
-    if (invalidCards.length > 0) {
-        message += `Invalides/non trouvées : ${invalidCards.join(', ')}.`;
-    }
-    messageElement.textContent = message;
-}
-
-//fonction qui agit sur les doubles sélectionnés. 
 function markCheckedAsGiven() {
     const checkboxes = document.querySelectorAll('#duplicateCards input[type="checkbox"]:checked');
     let processedCards = [];
     let removedCards = [];
 
     checkboxes.forEach(checkbox => {
-        const cardNumber = checkbox.value.trim().split(' ')[0];
+        const cardNumberWithCount = checkbox.value.trim();
+        const cardNumber = cardNumberWithCount.split(' ')[0]; // Extrait "SUI-1" de "SUI-1 (1x)"
         if (duplicateCards[cardNumber] > 1) {
             duplicateCards[cardNumber] -= 1;
             processedCards.push(`${cardNumber} (${duplicateCards[cardNumber]}x)`);
         } else {
             delete duplicateCards[cardNumber];
             removedCards.push(cardNumber);
-            checkbox.closest('li').remove();
+            checkbox.closest('li').remove(); // Supprime visuellement l'élément de la liste
         }
     });
+
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
     displayFeedback(processedCards, removedCards);
 }
+
 function displayFeedback(processedCards, removedCards) {
     const messageElement = document.getElementById('messageDouble');
     let message = '';
@@ -444,18 +499,13 @@ function displayFeedback(processedCards, removedCards) {
     messageElement.textContent = message;
 }
 
+//exportDataToJson : permet à l'utilisateur d'exporter ses données de cartes en format JSON.
 function exportDataToJson() {
-
-    // Création de l'objet à exporter
     const data = {
         ownedCards: ownedCards,
         missingCards: missingCards,
         duplicateCards: duplicateCards
     };
-    console.log('Owned Cards:', ownedCards);
-    console.log('Missing Cards:', missingCards);
-    console.log('Duplicate Cards:', duplicateCards);
-
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
@@ -465,6 +515,8 @@ function exportDataToJson() {
     downloadAnchorNode.remove();
 }
 
+
+//mportDataFromJson : permet à l'utilisateur d'importer des données de cartes à partir d'un fichier JSON.
 function importDataFromJson(event) {
     const fileReader = new FileReader();
     fileReader.onload = function (e) {
@@ -483,5 +535,3 @@ function importDataFromJson(event) {
     };
     fileReader.readAsText(event.target.files[0]);
 }
-
-
