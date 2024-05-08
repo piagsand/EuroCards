@@ -1,0 +1,76 @@
+
+  /* -------------------------------------------------- */
+  /* barre de navigation */
+  /* -------------------------------------------------- */
+  .nav-bar {
+    font-size: 1rem;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: fixed;
+    top: 20px;
+    width: 100%;
+    z-index: 1000; /* Assure que la barre de navigation reste au-dessus des autres éléments */
+    /* background: url("./assets/img/football-pattern.jpg") ; Un motif de football comme fond */
+    ul {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Centrage des éléments de la liste */
+      margin: -20px;
+      padding: 0;
+    
+      background: rgba(
+        13,
+        91,
+        180,
+        0.8
+      ); 
+      li{
+
+    list-style: none;
+    border-radius: 5px; /* Bords arrondis pour un look moderne */
+  
+    padding: 10px 10px;
+  
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  
+    background-color: transparent; /* Fond transparent pour laisser voir le motif */
+    color: white;
+    text-align: center;
+   
+  }
+  
+  /* logo PAXALOM */
+  #logo {
+    display: flex; /* Assure que le logo se comporte comme un bloc avec des marges */
+  
+    border-radius: 5px;
+  
+    margin: 0 20px; /* Ajout d'un peu d'espace autour du logo */
+    padding: 10px 15px;
+  
+    color: rgba(243, 243, 1, 0.813);
+  
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    /* font-size: 1 rem; Taille un peu plus grande pour le logo */
+    font-weight: 500;
+    /* font-stretch: expanded; */
+  }
+  
+  .nav-bar  Légère transparence pour voir le fond */
+  }
+  
+
+  
+  .nav-bar a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-bar a:hover {
+    color: #b2dfdb; /* Couleur légèrement différente au survol pour un effet interactif */
+  }

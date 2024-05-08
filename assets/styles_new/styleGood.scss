@@ -1,0 +1,380 @@
+$color_1: #333;
+$color_2: rgba(243, 243, 1, 0.813);
+$color_3: white;
+$color_4: #b2dfdb;
+$color_5: #1f7a1f;
+$color_6: #145214;
+$color_7: inherit;
+$color_8: red;
+$color_9: #249898;
+$color_10: #1749c8;
+$color_11: rgb(70, 113, 6);
+$font-family_1: "Helvetica Neue", sans-serif;
+$font-family_2: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+$background-color_1: #eff1f3;
+$background-color_2: #ffffff;
+$background-color_3: transparent;
+$background-color_4: #e6e6e6;
+$background-color_5: #eef9ee;
+$background-color_6: #f4f6f6;
+$background-color_7: #1f7a1f;
+$background-color_8: #145214;
+$border-color_1: #1f7a1f;
+
+/* Styles de base pour le corps et la page */
+/* -------------------------------------------------- */
+/* Styles pour les listes de cartes */
+/* Amélioration des cases à cocher pour mieux s'aligner avec le thème */
+/* -------------------------------------------------- */
+/* barre de navigation */
+/* -------------------------------------------------- */
+/* logo PAXALOM */
+/* -------------------------------------------------- */
+/* Styles de base pour la barre de navigation des groupes */
+/* -------------------------------------------------- */
+/* Styles pour les listes de cartes */
+/* Interaction au survol pour les éléments de liste */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* Styles pour les titres */
+/* -------------------------------------------------- */
+/* Conteneur pour les sections de la page */
+/* -------------------------------------------------- */
+/* Amélioration des cases à cocher */
+/* -------------------------------------------------- */
+/* Styles pour les boutons */
+/* -------------------------------------------------- */
+/* Styles pour les entrées de texte */
+/* -------------------------------------------------- */
+/* Adaptations pour les tablettes */
+/* Adaptations pour les mobiles */
+body {
+	font-family: $font-family_1;
+	background-color: $background-color_1;
+	color: $color_1;
+	margin: 0;
+	padding: 20px;
+}
+.cards-missing-list-1 {
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		padding: 0;
+		list-style-type: none;
+	}
+	li {
+		background-color: $background-color_2;
+		border: 1px solid #b0c4de;
+		border-radius: 5px;
+		margin: 10px;
+		padding: 10px;
+		width: calc(10% - 20px);
+		box-sizing: border-box;
+		cursor: pointer;
+	}
+	cursor: pointer;
+	margin: 5px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	width: 10%;
+	list-style-type: none;
+	&:hover {
+		background-color: $background-color_6;
+		transform: translateY(-2px);
+	}
+}
+input[type="checkbox"] {
+	transform: scale(1);
+	margin-right: 10px;
+	cursor: pointer;
+	margin-right: 5px;
+	cursor: pointer;
+}
+.nav-bar {
+	font-size: 1rem;
+	text-decoration: none;
+	letter-spacing: 1px;
+	transition: all 0.3s ease;
+	position: fixed;
+	top: 20px;
+	width: 100%;
+	z-index: 1000;
+	ul {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: -20px;
+		padding: 0;
+		background: rgba( 13, 91, 180, 0.8 );
+	}
+	li {
+		list-style: none;
+		border-radius: 5px;
+		padding: 10px 10px;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		background-color: $background-color_3;
+		color: $color_3;
+		text-align: center;
+	}
+	a {
+		text-decoration: none;
+		color: $color_3;
+		transition: color 0.3s ease;
+		&:hover {
+			color: $color_4;
+		}
+	}
+}
+#logo {
+	display: flex;
+	border-radius: 5px;
+	margin: 0 20px;
+	padding: 10px 15px;
+	color: $color_2;
+	font-family: $font-family_2;
+	font-weight: 500;
+}
+.top-navigation {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 20px;
+	padding: 10px;
+	background-color: $background-color_4;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	margin-bottom: 20px;
+	overflow-x: auto;
+	a {
+		color: $color_5;
+		text-decoration: none;
+		font-weight: bold;
+		padding: 8px 16px;
+		transition: color 0.3s, background-color 0.3s;
+		&:hover {
+			color: $color_6;
+			background-color: $background-color_5;
+		}
+	}
+}
+.cards-missing-list {
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+	li {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+}
+#ownedCards {
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+	li {
+		cursor: pointer;
+		margin: 5px;
+		padding: 5px;
+		border: 1px solid #ccc;
+		width: 10%;
+		list-style-type: none;
+		&:hover {
+			background-color: $background-color_6;
+			transform: translateY(-2px);
+		}
+	}
+}
+#duplicateCards {
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+	li {
+		cursor: pointer;
+		margin: 5px;
+		padding: 5px;
+		border: 1px solid #ccc;
+		width: 10%;
+		list-style-type: none;
+		&:hover {
+			background-color: $background-color_6;
+			transform: translateY(-2px);
+		}
+	}
+}
+cardItem {
+	input[type="checkbox"] {
+		cursor: pointer;
+		cursor: pointer;
+	}
+	li {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+}
+.country-header {
+	h3 {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 8px;
+		font-weight: bold;
+		text-decoration: none;
+		color: $color_7;
+		margin-left: 20px;
+	}
+}
+.flags-container {
+	display: flex;
+	margin-bottom: 20px;
+	overflow-x: auto;
+}
+.country-flag {
+	width: 30px;
+	height: 30px;
+	object-fit: contain;
+	border-radius: 50%;
+	margin-right: 10px;
+	cursor: pointer;
+	display: block;
+	padding: 0;
+	background-color: $background-color_3;
+}
+#message {
+	color: $color_8;
+	margin-top: 20px;
+}
+#messageDouble {
+	color: $color_8;
+	margin-top: 20px;
+}
+h1 {
+	color: $color_5;
+	text-align: center;
+	font-size: 2.5rem;
+	margin-top: 20px;
+	font-weight: bold;
+}
+.typeOfCards {
+	border-bottom: 3px solid #1f7a1f;
+	color: $color_9;
+	padding-bottom: 5px;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+	font-size: 1.2rem;
+}
+.countries {
+	border-bottom: 3px solid #1f7a1f;
+	color: $color_10;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+	font-size: 1rem;
+}
+h3 {
+	color: $color_11;
+	text-transform: capitalize;
+}
+section {
+	background: white;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	padding: 20px;
+	margin-bottom: 30px;
+}
+button {
+	background-color: $background-color_7;
+	color: $color_3;
+	border: none;
+	padding: 10px 20px;
+	font-size: 0.9rem;
+	cursor: pointer;
+	border-radius: 8px;
+	margin-top: 10px;
+	transition: background-color 0.2s, transform 0.1s;
+	&:hover {
+		background-color: $background-color_8;
+		transform: scale(1.05);
+	}
+}
+input[type="text"] {
+	padding: 10px;
+	margin: 10px 0;
+	width: 100%;
+	box-sizing: border-box;
+	border: 1px solid #d0d7de;
+	border-radius: 8px;
+	font-size: 0.9rem;
+	&:focus {
+		border-color: $border-color_1;
+	}
+}
+@media (max-width: 768px) {
+	.top-navigation {
+		justify-content: start;
+		a {
+			font-size: 0.8rem;
+		}
+	}
+	.navbar {
+		justify-content: start;
+		a {
+			font-size: 0.8rem;
+		}
+	}
+}
+@media (max-width: 480px) {
+	.top-navigation {
+		flex-direction: column;
+		align-items: center;
+		a {
+			width: 100%;
+			text-align: center;
+		}
+	}
+	nav-bar {
+		flex-direction: column;
+		align-items: center;
+		a {
+			width: 100%;
+			text-align: center;
+		}
+	}
+}
+@media print {
+	body {
+		font-size: 10pt;
+		background: blue;
+	}
+	.no-print {
+		display: none;
+		display: none;
+	}
+	header {
+		display: none;
+	}
+	footer {
+		display: none;
+	}
+	nav {
+		display: none;
+	}
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+	th {
+		border: 1px solid #ddd;
+		padding: 2px 5px;
+	}
+	td {
+		border: 1px solid #ddd;
+		padding: 2px 5px;
+	}
+	.country-flag {
+		display: none;
+	}
+}

@@ -1,0 +1,377 @@
+@charset "UTF-8";
+/* Styles de base pour le corps et la page */
+/* -------------------------------------------------- */
+/* Styles pour les listes de cartes */
+/* Amélioration des cases à cocher pour mieux s'aligner avec le thème */
+/* -------------------------------------------------- */
+/* barre de navigation */
+/* -------------------------------------------------- */
+/* logo PAXALOM */
+/* -------------------------------------------------- */
+/* Styles de base pour la barre de navigation des groupes */
+/* -------------------------------------------------- */
+/* Styles pour les listes de cartes */
+/* Interaction au survol pour les éléments de liste */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* Styles pour les titres */
+/* -------------------------------------------------- */
+/* Conteneur pour les sections de la page */
+/* -------------------------------------------------- */
+/* Amélioration des cases à cocher */
+/* -------------------------------------------------- */
+/* Styles pour les boutons */
+/* -------------------------------------------------- */
+/* Styles pour les entrées de texte */
+/* -------------------------------------------------- */
+/* Adaptations pour les tablettes */
+/* Adaptations pour les mobiles */
+body {
+  font-family: "Helvetica Neue", sans-serif;
+  background-color: #eff1f3;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+.cards-missing-list-1 {
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  width: 10%;
+  list-style-type: none;
+}
+.cards-missing-list-1 ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0;
+  list-style-type: none;
+}
+.cards-missing-list-1 li {
+  background-color: #ffffff;
+  border: 1px solid #b0c4de;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  width: calc(10% - 20px);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.cards-missing-list-1:hover {
+  background-color: #f4f6f6;
+  transform: translateY(-2px);
+}
+
+input[type=checkbox] {
+  transform: scale(1);
+  margin-right: 10px;
+  cursor: pointer;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.nav-bar {
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: fixed;
+  top: 20px;
+  width: 100%;
+  z-index: 1000;
+}
+.nav-bar ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -20px;
+  padding: 0;
+  background: rgba(13, 91, 180, 0.8);
+}
+.nav-bar li {
+  list-style: none;
+  border-radius: 5px;
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: transparent;
+  color: white;
+  text-align: center;
+}
+.nav-bar a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+.nav-bar a:hover {
+  color: #b2dfdb;
+}
+
+#logo {
+  display: flex;
+  border-radius: 5px;
+  margin: 0 20px;
+  padding: 10px 15px;
+  color: rgba(243, 243, 1, 0.813);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: 500;
+}
+
+.top-navigation {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
+  background-color: #e6e6e6;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+.top-navigation a {
+  color: #1f7a1f;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  transition: color 0.3s, background-color 0.3s;
+}
+.top-navigation a:hover {
+  color: #145214;
+  background-color: #eef9ee;
+}
+
+.cards-missing-list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+.cards-missing-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#ownedCards {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+#ownedCards li {
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  width: 10%;
+  list-style-type: none;
+}
+#ownedCards li:hover {
+  background-color: #f4f6f6;
+  transform: translateY(-2px);
+}
+
+#duplicateCards {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+#duplicateCards li {
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  width: 10%;
+  list-style-type: none;
+}
+#duplicateCards li:hover {
+  background-color: #f4f6f6;
+  transform: translateY(-2px);
+}
+
+cardItem input[type=checkbox] {
+  cursor: pointer;
+  cursor: pointer;
+}
+cardItem li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.country-header h3 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+  margin-left: 20px;
+}
+
+.flags-container {
+  display: flex;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.country-flag {
+  width: 30px;
+  height: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+  display: block;
+  padding: 0;
+  background-color: transparent;
+}
+
+#message {
+  color: red;
+  margin-top: 20px;
+}
+
+#messageDouble {
+  color: red;
+  margin-top: 20px;
+}
+
+h1 {
+  color: #1f7a1f;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.typeOfCards {
+  border-bottom: 3px solid #1f7a1f;
+  color: #249898;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+.countries {
+  border-bottom: 3px solid #1f7a1f;
+  color: #1749c8;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+h3 {
+  color: rgb(70, 113, 6);
+  text-transform: capitalize;
+}
+
+section {
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+button {
+  background-color: #1f7a1f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-top: 10px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+button:hover {
+  background-color: #145214;
+  transform: scale(1.05);
+}
+
+input[type=text] {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+input[type=text]:focus {
+  border-color: #1f7a1f;
+}
+
+@media (max-width: 768px) {
+  .top-navigation {
+    justify-content: start;
+  }
+  .top-navigation a {
+    font-size: 0.8rem;
+  }
+  .navbar {
+    justify-content: start;
+  }
+  .navbar a {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .top-navigation {
+    flex-direction: column;
+    align-items: center;
+  }
+  .top-navigation a {
+    width: 100%;
+    text-align: center;
+  }
+  nav-bar {
+    flex-direction: column;
+    align-items: center;
+  }
+  nav-bar a {
+    width: 100%;
+    text-align: center;
+  }
+}
+@media print {
+  body {
+    font-size: 10pt;
+    background: blue;
+  }
+  .no-print {
+    display: none;
+    display: none;
+  }
+  header {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+  nav {
+    display: none;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th {
+    border: 1px solid #ddd;
+    padding: 2px 5px;
+  }
+  td {
+    border: 1px solid #ddd;
+    padding: 2px 5px;
+  }
+  .country-flag {
+    display: none;
+  }
+}/*# sourceMappingURL=styleGood.css.map */

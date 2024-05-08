@@ -8,6 +8,9 @@ body {
   padding: 20px;
 }
 
+#missingCards {
+  display: none;
+}
 /* -------------------------------------------------- */
 
 /* Styles pour les listes de cartes */
