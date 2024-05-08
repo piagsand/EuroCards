@@ -45,7 +45,9 @@ const euroCards = {
         "Slovenia": ["SVN-P1", "SVN-P2", "SVN-PTW", "SVN-SP", "SVN-TOP1", "SVN-TOP2", "SVN-1", "SVN-2", "SVN-3", "SVN-4", "SVN-5", "SVN-6", "SVN-7", "SVN-8", "SVN-9", "SVN-10", "SVN-11", "SVN-12", "SVN-13", "SVN-14", "SVN-15", "SVN-16", "SVN-17", "SVN-18", "SVN-19", "SVN-20", "SVN-21"],
         "Denmark": ["DEN-P1", "DEN-P2", "DEN-PTW", "DEN-SP", "DEN-TOP1", "DEN-TOP2", "DEN-1", "DEN-2", "DEN-3", "DEN-4", "DEN-5", "DEN-6", "DEN-7", "DEN-8", "DEN-9", "DEN-10", "DEN-11", "DEN-12", "DEN-13", "DEN-14", "DEN-15", "DEN-16", "DEN-17", "DEN-18", "DEN-19", "DEN-20", "DEN-21"],
         "Serbia": ["SRB-P1", "SRB-P2", "SRB-PTW", "SRB-SP", "SRB-TOP1", "SRB-TOP2", "SRB-1", "SRB-2", "SRB-3", "SRB-4", "SRB-5", "SRB-6", "SRB-7", "SRB-8", "SRB-9", "SRB-10", "SRB-11", "SRB-12", "SRB-13", "SRB-14", "SRB-15", "SRB-16", "SRB-17", "SRB-18", "SRB-19", "SRB-20", "SRB-21"],
-        "England": ["ENG-P1", "ENG-P2", "ENG-PTW", "ENG-SP", "ENG-TOP1", "ENG-TOP2", "ENG-1", "ENG-2", "ENG-3", "ENG-4", "ENG-5", "ENG-6", "ENG-7", "ENG-8", "ENG-9", "ENG-10", "ENG-11", "ENG-12", "ENG-13", "ENG-14", "ENG-15", "ENG-16", "ENG-17", "ENG-18", "ENG-19", "ENG-20", "ENG-21"]
+        "England": ["ENG-P1", "ENG-P2", "ENG-PTW", "ENG-SP", "ENG-TOP1", "ENG-TOP2", "ENG-1", "ENG-2", "ENG-3", "ENG-4", "ENG-5", "ENG-6", "ENG-7", "ENG-8", "ENG-9", "ENG-10", "ENG-11", "ENG-12", "ENG-13", "ENG-14", "ENG-15", "ENG-16", "ENG-17", "ENG-18", "ENG-19", "ENG-20", "ENG-21"],
+        "Special": ["MM-1", "MM-2"],
+
     },
 
     "Group D": {
@@ -432,10 +434,16 @@ function updateMissingCards() {
     missingCards = allCards.filter(card => !ownedCards.includes(card));
     displayGroups(); // Mettre à jour l'affichage des cartes manquantes
 }
-
 function updateList(listId, items) {
     const list = document.getElementById(listId);
     list.innerHTML = '';
+
+    // Cacher la liste des cartes manquantes
+    if (listId === 'missingCards') {
+        list.style.display = 'none';
+    } else {
+        list.style.display = ''; // Assurez-vous que les autres listes sont visibles
+    }
 
     if (Array.isArray(items)) {
         items.forEach(item => {
@@ -561,28 +569,6 @@ function displayFeedback(processedCards, removedCards) {
 }
 
 
-// TODO > Corriger la partie missing ... 
-// function exportDataToJson() {
-//     // updateMissingCards();
-
-//     // Création de l'objet à exporter
-//     const data = {
-//         ownedCards: ownedCards,
-//         missingCards: missingCards,
-//         duplicateCards: duplicateCards
-//     };
-//     console.log('Owned Cards:', ownedCards);
-//     console.log('Missing Cards:', missingCards);
-//     console.log('Duplicate Cards:', duplicateCards);
-
-//     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
-//     const downloadAnchorNode = document.createElement('a');
-//     downloadAnchorNode.setAttribute("href", dataStr);
-//     downloadAnchorNode.setAttribute("download", "cards_data.json");
-//     document.body.appendChild(downloadAnchorNode);
-//     downloadAnchorNode.click();
-//     downloadAnchorNode.remove();
-// }
 function exportDataToJson() {
     updateMissingCards();
 
@@ -605,26 +591,6 @@ function exportDataToJson() {
     downloadAnchorNode.remove();
 }
 
-// function importDataFromJson(event) {
-//     const fileReader = new FileReader();
-//     fileReader.onload = function (e) {
-//         const content = e.target.result;
-//         try {
-//             const data = JSON.parse(content);
-//             ownedCards = data.ownedCards;
-//             missingCards = data.missingCards;
-//             duplicateCards = data.duplicateCards;
-
-//             updateList('ownedCards', ownedCards);
-//             updateList('missingCards', missingCards);
-//             updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
-//             displayGroups(); // Rafraîchir l'affichage des groupes
-//         } catch (error) {
-//             alert('Erreur lors de la lecture du fichier JSON : ' + error);
-//         }
-//     };
-//     fileReader.readAsText(event.target.files[0]);
-// }
 function importDataFromJson(event) {
     const fileReader = new FileReader();
     fileReader.onload = function (e) {
