@@ -1,0 +1,108 @@
+/* Styles de base pour le corps et la page */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+/* Style pour les cases à cocher */
+input[type="checkbox"] {
+  transform: scale(
+    0.75
+  ); /* Réduit la taille de la case à cocher à 75% de sa taille originale */
+  margin-right: 10px; /* Espacement à droite de la case */
+  cursor: pointer; /* Indique que l'élément est cliquable */
+}
+
+/* Amélioration de l'accessibilité et de l'interaction */
+input[type="checkbox"]:hover {
+  border-color: #0056b3; /* Change la couleur de bordure au survol */
+}
+
+/* Styles pour les titres */
+h1,
+h2 {
+  color: #333;
+}
+
+/* Conteneur pour les sections de la page */
+section {
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Amélioration de l'apparence des cases à cocher */
+input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+/* Styles pour les boutons */
+button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #004494;
+}
+
+/* Styles pour les entrées de texte */
+input[type="text"] {
+  padding: 10px;
+  margin: 10px 0;
+  width: calc(100% - 22px);
+  box-sizing: border-box;
+}
+
+/* Espace entre les éléments de la liste pour une meilleure clarté */
+li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+/* Conteneur de liste */
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+/* Éléments de liste */
+li {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 10px;
+  padding: 10px;
+  width: calc(
+    10% - 20px
+  ); /* Ajustez la largeur pour contrôler le nombre de colonnes */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center; /* Centrer les éléments de la liste verticalement */
+}
+
+/* Adapter les éléments pour les écrans plus petits */
+@media (max-width: 800px) {
+  li {
+    width: calc(50% - 20px); /* Plus de colonnes sur des écrans plus petits */
+  }
+}
+
+@media (max-width: 500px) {
+  li {
+    width: 100%; /* Une seule colonne sur les écrans très petits */
+  }
+}

@@ -8,8 +8,10 @@ body {
   padding: 20px;
 }
 
-#missingCards {
-  display: none;
+p {
+  font-size: 0.9rem;
+  color: rgb(15, 69, 162);
+  margin: 0;
 }
 /* -------------------------------------------------- */
 
@@ -17,20 +19,8 @@ body {
 .cards-missing-list-1 ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
   padding: 0;
   list-style-type: none;
-}
-
-.cards-missing-list-1 li {
-  background-color: #ffffff; /* blanc pour les éléments de liste, clair et simple */
-  border: 1px solid #b0c4de; /* bordure légèrement bleue */
-  border-radius: 5px;
-  margin: 10px;
-  padding: 10px;
-  width: calc(10% - 20px); /* ajustement pour trois colonnes */
-  box-sizing: border-box;
-  cursor: pointer;
 }
 
 /* Amélioration des cases à cocher pour mieux s'aligner avec le thème */
@@ -65,6 +55,7 @@ input[type="checkbox"] {
   padding: 10px 15px;
 
   color: rgba(243, 243, 1, 0.813);
+  /* background: #0d5bb4ce; */
 
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -76,7 +67,7 @@ input[type="checkbox"] {
 .nav-bar ul {
   display: flex;
   align-items: center;
-  justify-content: center; /* Centrage des éléments de la liste */
+  /* justify-content: center; Centrage des éléments de la liste */
   margin: -20px;
   padding: 0;
 
@@ -143,15 +134,17 @@ input[type="checkbox"] {
 /* -------------------------------------------------- */
 /* Styles pour les listes de cartes */
 
+/* Style pour La liste UL */
 .cards-missing-list,
 #ownedCards,
 #duplicateCards {
   list-style-type: none;
   display: flex;
+  flex-direction: start;
   flex-wrap: wrap;
 }
 
-.cards-missing-list-1,
+.cards-missing-list-item,
 #ownedCards li,
 #duplicateCards li {
   cursor: pointer;
@@ -163,22 +156,17 @@ input[type="checkbox"] {
 }
 
 /* Interaction au survol pour les éléments de liste */
-.cards-missing-list-1:hover,
+.cards-missing-list-item:hover,
 #ownedCards li:hover,
 #duplicateCards li:hover {
   background-color: #f4f6f6; /* Changement de couleur au survol */
   transform: translateY(-2px); /* Léger effet de soulèvement */
-
 }
 
 .cards-missing-list li {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-cardItem input[type="checkbox"] {
-  cursor: pointer;
 }
 
 /* -------------------------------------------------- */
@@ -220,13 +208,13 @@ cardItem input[type="checkbox"] {
 }
 /* -------------------------------------------------- */
 
-cardItem li {
+li.cardItem {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-cardItem input[type="checkbox"] {
+li.cardItem input[type="checkbox"] {
   cursor: pointer;
 }
 
@@ -302,13 +290,25 @@ button:hover {
 
 /* Styles pour les entrées de texte */
 input[type="text"] {
+  /* display: inline-block;
+  height: 40px;
   padding: 10px;
   margin: 10px 0;
-  width: 100%;
+  width: 80%;
   box-sizing: border-box;
   border: 1px solid #d0d7de;
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 0.9rem; */
+  background-color: #fff;
+  border-color: #000;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+
+  font-size: 1.3rem;
+  letter-spacing: -0.5px;
+  line-height: 26px;
+  padding: 20px 130px 20px 32px;
 }
 
 input[type="text"]:focus {
@@ -320,20 +320,56 @@ input[type="text"]:focus {
 @media (max-width: 768px) {
   .top-navigation,
   .navbar {
-    justify-content: start;
+    justify-content: row;
   }
 
   .top-navigation a,
   .navbar a {
     font-size: 0.8rem; /* Réduire la taille du texte pour les appareils plus petits */
   }
+
+  .selected {
+    background-color: #e0e0e0;
+    /* Un fond gris pour indiquer la sélection */
+  }
+
+  /* cartes  */
+  .cards-missing-list-item,
+  #ownedCards li,
+  #duplicateCards li {
+    background-color: #254db3db;
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    /* gap: 20px; */
+  }
+  .cards-missing-list li {
+    margin: 0;
+    padding: 5px;
+    gap: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    /* box-shadow: 1px 1px 1px black; */
+    display: block;
+  }
+
+  .cards-missing-list li:hover {
+    background: #145214;
+  }
 }
 
+/* -------------------------------------------------- */
 /* Adaptations pour les mobiles */
 @media (max-width: 480px) {
   .top-navigation,
   nav-bar {
-    flex-direction: column; /* Les liens s'affichent en colonne sur les petits écrans */
+    flex-direction: column; /*  Les liens s'affichent en colonne sur les petits écrans */
     align-items: center;
   }
 
@@ -341,140 +377,5 @@ input[type="text"]:focus {
   nav-bar a {
     width: 100%; /* Les liens prennent toute la largeur disponible */
     text-align: center; /* Centrer le texte dans les liens */
-  }
-}
-@media print {
-  body {
-    font-size: 10pt;
-    background: blue;
-  }
-  .no-print {
-    display: none;
-  }
-  header,
-  footer,
-  nav,
-  .no-print {
-    display: none;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  th,
-  td {
-    border: 1px solid #ddd;
-    padding: 2px 5px;
-  }
-  .country-flag {
-    display: none;
-  }
-}
-/* Styles de base pour le corps et la page */
-body {
-  font-family: "Arial", sans-serif;
-  background-color: #f4f4f9;
-  margin: 0;
-  padding: 20px;
-  color: #333;
-}
-/* Style pour les cases à cocher */
-input[type="checkbox"] {
-  transform: scale(
-    0.75
-  ); /* Réduit la taille de la case à cocher à 75% de sa taille originale */
-  margin-right: 10px; /* Espacement à droite de la case */
-  cursor: pointer; /* Indique que l'élément est cliquable */
-}
-
-/* Amélioration de l'accessibilité et de l'interaction */
-input[type="checkbox"]:hover {
-  border-color: #0056b3; /* Change la couleur de bordure au survol */
-}
-
-/* Styles pour les titres */
-h1,
-h2 {
-  color: #333;
-}
-
-/* Conteneur pour les sections de la page */
-section {
-  background: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-/* Amélioration de l'apparence des cases à cocher */
-input[type="checkbox"] {
-  margin-right: 10px;
-  transform: scale(1.2);
-}
-
-/* Styles pour les boutons */
-button {
-  background-color: #0056b3;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-button:hover {
-  background-color: #004494;
-}
-
-/* Styles pour les entrées de texte */
-input[type="text"] {
-  padding: 10px;
-  margin: 10px 0;
-  width: calc(100% - 22px);
-  box-sizing: border-box;
-}
-
-/* Espace entre les éléments de la liste pour une meilleure clarté */
-li:not(:last-child) {
-  margin-bottom: 10px;
-}
-
-/* Conteneur de liste */
-ul {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
-
-/* Éléments de liste */
-li {
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  margin: 10px;
-  padding: 10px;
-  width: calc(
-    10% - 20px
-  ); /* Ajustez la largeur pour contrôler le nombre de colonnes */
-  box-sizing: border-box;
-  display: flex;
-  align-items: center; /* Centrer les éléments de la liste verticalement */
-}
-
-/* Adapter les éléments pour les écrans plus petits */
-@media (max-width: 800px) {
-  li {
-    width: calc(50% - 20px); /* Plus de colonnes sur des écrans plus petits */
-  }
-}
-
-@media (max-width: 500px) {
-  li {
-    width: 100%; /* Une seule colonne sur les écrans très petits */
   }
 }

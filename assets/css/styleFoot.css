@@ -1,0 +1,108 @@
+/* Styles de base pour le corps et la page */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f0f8ff; /* bleu clair, évoquant le ciel ouvert d'un stade */
+  color: #073763; /* bleu marine pour le texte, pour le contraste */
+  margin: 0;
+  padding: 20px;
+}
+
+/* Styles pour les titres */
+h1 {
+  color: #0056b3; /* un bleu plus vif */
+  text-align: center;
+}
+
+h2 {
+  border-bottom: 2px solid #0056b3; /* ajoute une touche de couleur sous les sous-titres */
+  color: #073763;
+  padding-bottom: 5px;
+}
+
+/* Conteneur pour les sections de la page */
+section {
+  background: white;
+  border: 1px solid #d1e0e0; /* un gris bleu clair */
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Styles pour les listes de cartes */
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  background-color: #ffffff; /* blanc pour les éléments de liste, clair et simple */
+  border: 1px solid #b0c4de; /* bordure légèrement bleue */
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  width: calc(10% - 20px); /* ajustement pour trois colonnes */
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* Amélioration des cases à cocher pour mieux s'aligner avec le thème */
+input[type="checkbox"] {
+  transform: scale(1);
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Styles pour les boutons */
+button {
+  background-color: #008000; /* vert, évoquant le terrain de jeu */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #004d00; /* un vert plus foncé pour le survol */
+}
+
+/* Styles pour les entrées de texte */
+input[type="text"] {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #b0c4de;
+}
+
+/* Adaptation pour les écrans plus petits */
+@media (max-width: 800px) {
+  li {
+    width: calc(50% - 20px); /* deux colonnes pour les écrans moyens */
+  }
+}
+
+@media (max-width: 500px) {
+  li {
+    width: 100%; /* une colonne pour les petits écrans */
+  }
+}
+
+#groupsContainer div {
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+#groupsContainer h2 {
+  color: #0056b3;
+}
+
+#groupsContainer h3 {
+  color: #004494;
+}

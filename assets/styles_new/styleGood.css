@@ -309,6 +309,17 @@ input[type=text]:focus {
   border-color: #1f7a1f;
 }
 
+/* Adaptation pour les écrans plus petits */
+@media (max-width: 800px) {
+  li {
+    width: calc(50% - 20px); /* deux colonnes pour les écrans moyens */
+  }
+}
+@media (max-width: 500px) {
+  li {
+    width: 100%; /* une colonne pour les petits écrans */
+  }
+}
 @media (max-width: 768px) {
   .top-navigation {
     justify-content: start;
@@ -339,39 +350,5 @@ input[type=text]:focus {
   nav-bar a {
     width: 100%;
     text-align: center;
-  }
-}
-@media print {
-  body {
-    font-size: 10pt;
-    background: blue;
-  }
-  .no-print {
-    display: none;
-    display: none;
-  }
-  header {
-    display: none;
-  }
-  footer {
-    display: none;
-  }
-  nav {
-    display: none;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  th {
-    border: 1px solid #ddd;
-    padding: 2px 5px;
-  }
-  td {
-    border: 1px solid #ddd;
-    padding: 2px 5px;
-  }
-  .country-flag {
-    display: none;
   }
 }/*# sourceMappingURL=styleGood.css.map */

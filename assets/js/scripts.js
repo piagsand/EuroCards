@@ -688,25 +688,79 @@ function generatePDFContent(missingCards, duplicateCards) {
 }
 
 // Function to trigger PDF generation and download
+// function printOrExportPDF() {
+//     const missingCards = getMissingCards(); // Get an updated list of missing cards
+//     const duplicateCards = getDuplicateCards(); // Get an updated list of duplicate cards
+
+//     // Generate PDF content
+//     const doc = generatePDFContent(missingCards, duplicateCards);
+
+//     // Get user preference (print or export)
+//     const action = prompt("Voulez-vous imprimer ou exporter le rapport PDF ? (imprimer/exporter)", "imprimer");
+
+//     if (action.toLowerCase() === 'imprimer') {
+//         // Open the PDF in a new browser window for printing
+//         doc.output('dataurlnewwindow');
+//     } else if (action.toLowerCase() === 'exporter') {
+//         // Save the PDF to a file
+//         const fileName = prompt("Entrez le nom du fichier PDF:", "rapport-cartes-euro.pdf");
+//         if (fileName) {
+//             doc.save(fileName);
+//             alert(`Rapport PDF sauvegardé sous le nom ${fileName}.`);
+//         } else {
+//             alert("L'exportation du PDF a été annulée.");
+//         }
+//     } else {
+//         alert("Action non valide. Veuillez choisir 'imprimer' ou 'exporter'.");
+//     }
+// }
 function printOrExportPDF() {
     const missingCards = getMissingCards(); // Get an updated list of missing cards
     const duplicateCards = getDuplicateCards(); // Get an updated list of duplicate cards
 
-    // Generate PDF content
-    const doc = generatePDFContent(missingCards, duplicateCards);
+    // Create a new jsPDF instance
+    var doc = new jsPDF('landscape'); // Set orientation to landscape
 
-    // Get user preference (print or export)
-    const action = prompt("Voulez-vous imprimer ou exporter le rapport PDF ? (imprimer/exporter)", "imprimer");
+    // Add a title and the date to the PDF
+    doc.setFontSize(16);
+    doc.text('Rapport sur les cartes Euro manquantes et en double', 10, 20);
+    doc.setFontSize(12);
+    doc.text('Date: ' + new Date().toLocaleDateString(), 10, 30);
 
+    // Section for missing cards
+    doc.setFontSize(14);
+    doc.text('Cartes manquantes:', 10, 40);
+    doc.setFontSize(12);
+    if (missingCards.length === 0) {
+        doc.text('Aucune carte manquante.', 10, 50);
+    } else {
+        missingCards.forEach((card, index) => {
+            doc.text(card.code + ' - ' + card.country, 10, 60 + (10 * index));
+        });
+    }
+
+    // Section for duplicate cards
+    doc.addPage();
+    doc.setFontSize(14);
+    doc.text('Cartes en double:', 10, 20);
+    doc.setFontSize(12);
+    if (Object.keys(duplicateCards).length === 0) {
+        doc.text('Aucune carte en double.', 10, 30);
+    } else {
+        Object.entries(duplicateCards).forEach(([card, count], index) => {
+            doc.text(card + ' - ' + count + ' fois', 10, 40 + (10 * index));
+        });
+    }
+
+    // Prompt user for action
+    var action = prompt("Voulez-vous imprimer ou exporter le rapport PDF ? (imprimer/exporter)", "imprimer");
     if (action.toLowerCase() === 'imprimer') {
-        // Open the PDF in a new browser window for printing
-        doc.output('dataurlnewwindow');
+        doc.autoPrint(); // Auto print the PDF
+        window.open(doc.output('bloburl')); // Open PDF in a new window to trigger the print dialog
     } else if (action.toLowerCase() === 'exporter') {
-        // Save the PDF to a file
-        const fileName = prompt("Entrez le nom du fichier PDF:", "rapport-cartes-euro.pdf");
+        var fileName = prompt("Entrez le nom du fichier PDF:", "rapport-cartes-euro.pdf");
         if (fileName) {
-            doc.save(fileName);
-            alert(`Rapport PDF sauvegardé sous le nom ${fileName}.`);
+            doc.save(fileName); // Save the PDF with the specified file name
         } else {
             alert("L'exportation du PDF a été annulée.");
         }
