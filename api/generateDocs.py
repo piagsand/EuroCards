@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
 
-
-from http.server import BaseHTTPRequestHandler
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from docx import Document
 import io
 import json
 
 class handler(BaseHTTPRequestHandler):
     def do_POST(self):
-        self.send_header('Access-Control-Allow-Origin', '*')
-        content_length = int(self.headers['Content-Length'])  # Obtient la taille des données POST
-        post_data = self.rfile.read(content_length)  # Lit les données POST
-        data = json.loads(post_data.decode('utf-8'))  # Décode les données JSON
-        
-        # Vos codes pays mappés
+        try:
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            data = json.loads(post_data.decode('utf-8'))
+        except (ValueError, json.JSONDecodeError):
+            self.send_response(400)  # Bad Request
+            self.end_headers()
+            return
+
+        # Country codes mapping
         country_codes = {
             "GER": "Germany", "SCO": "Scotland", "HUN": "Hungary", "SUI": "Switzerland",
             "ESP": "Spain", "CRO": "Croatia", "ITA": "Italy", "ALB": "Albania", "SVN": "Slovenia",
@@ -24,11 +27,11 @@ class handler(BaseHTTPRequestHandler):
             "LUX": "Luxembourg", "GRE": "Greece", "KAZ": "Kazakhstan", "POR": "Portugal", "CZE": "Czechia"
         }
 
-        # Création d'un document Word
+        # Create a Word document
         doc = Document()
         doc.add_heading('Liste des Cartes', level=1)
 
-        # Traite les différentes catégories de cartes
+        # Process different card categories
         sections = [
             ('Cartes manquantes', data.get('missingCards', [])),
             ('Cartes acquises', data.get('ownedCards', [])),
@@ -41,15 +44,16 @@ class handler(BaseHTTPRequestHandler):
                 country_name = country_codes.get(prefix, 'Unknown Country')
                 doc.add_paragraph(f"{country_name}: {card}")
 
-        # Sauvegarde le document Word en mémoire
-        mem_file = io.BytesIO()
-        doc.save(mem_file)
-        mem_file.seek(0)
-
-        self.send_response(200)
-        self.send_header('Content-type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-        self.end_headers()
-        self.wfile.write(mem_file.getvalue())
+        # Save the Word document in memory
+        with io.BytesIO() as mem_file:
+            doc.save(mem_file)
+            mem_file.seek(0)
+            document_data = mem_file.getvalue()
+            self.send_response(200)
+            self.send_header('Content-type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+            self.send_header('Content-Length', str(len(document_data)))
+            self.end_headers()
+            self.wfile.write(document_data)
 
     def do_OPTIONS(self):
         self.send_response(204)  # No Content
@@ -58,3 +62,11 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
 
+def run(server_class=HTTPServer, handler_class=handler, port=8080):
+    server_address = ('', port)
+    httpd = server_class(server_address, handler_class)
+    print(f'Starting httpd on port {port}...')
+    httpd.serve_forever()
+
+if __name__ == "__main__":
+    run()

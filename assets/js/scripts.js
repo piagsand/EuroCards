@@ -819,18 +819,54 @@ function getDuplicateCards() {
 
 // Fonction qui génère un document words en faisant appele à un script python.
 
+// document.getElementById('generateReport').addEventListener('click', function () {
+//     const missingCards = localStorage.getItem('missingCards');  // Assurez-vous que ces données sont stockées auparavant
+//     const ownedCards = localStorage.getItem('ownedCards');
+//     const duplicateCards = localStorage.getItem('duplicateCards');
+
+//     console.log(missingCards);
+
+//     fetch('https://euro-cards-git-mainwithstorage-piagsands-projects.vercel.app//api/generateDocs', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//             missingCards: JSON.parse(missingCards),
+//             ownedCards: JSON.parse(ownedCards),
+//             duplicateCards: JSON.parse(duplicateCards)
+//         })
+//     })
+//         .then(response => response.blob())
+//         .then(blob => {
+//             const url = window.URL.createObjectURL(blob);
+//             const a = document.createElement('a');
+//             a.href = url;
+//             a.download = "report.docx";
+//             document.body.appendChild(a); // Append the element to work in Firefox
+//             a.click();
+//             a.remove();  // After downloading remove the element and revoke the URL
+//             window.URL.revokeObjectURL(url);
+//         })
+//         .catch(error => console.error('Error:', error));
+// });
+
 document.getElementById('generateReport').addEventListener('click', function () {
-    const missingCards = localStorage.getItem('missingCards');  // Assurez-vous que ces données sont stockées auparavant
+    const missingCards = localStorage.getItem('missingCards');
     const ownedCards = localStorage.getItem('ownedCards');
     const duplicateCards = localStorage.getItem('duplicateCards');
 
-    console.log(missingCards);
+    if (missingCards === null || ownedCards === null || duplicateCards === null) {
+        console.error('One or more required items are missing in localStorage');
+        alert('Please make sure all card data is available before generating the report.');
+        return;
+    }
 
-    fetch('https://euro-cards-git-mainwithstorage-piagsands-projects.vercel.app//api/generateDocs', {
+    console.log(missingCards); // Debugging line, consider removing for production
+
+    fetch('https://euro-cards-git-mainwithstorage-piagsands-projects.vercel.app/api/generateDocs', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             missingCards: JSON.parse(missingCards),
             ownedCards: JSON.parse(ownedCards),
@@ -843,14 +879,16 @@ document.getElementById('generateReport').addEventListener('click', function () 
             const a = document.createElement('a');
             a.href = url;
             a.download = "report.docx";
-            document.body.appendChild(a); // Append the element to work in Firefox
+            document.body.appendChild(a);
             a.click();
-            a.remove();  // After downloading remove the element and revoke the URL
+            a.remove();
             window.URL.revokeObjectURL(url);
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to generate report. Please try again.');
+        });
 });
-
 // Ajout de la fonction pour réinitialiser les données
 document.getElementById('resetButton').addEventListener('click', function () {
     // Réinitialiser les variables à leurs valeurs d'origine
