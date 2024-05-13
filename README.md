@@ -2,9 +2,6 @@
 
 ## todo
 
-- vérifier la fonction qui ajoute les cartes, si on ne mets pas la bonne carte.. problème.
-- pourquoi y a t'il la 2ème liste missing_cards
-
 The code snippet is a JavaScript function that manages a collection of football cards for the UEFA Euro tournament. It allows users to add cards to their collection, mark cards as duplicates, and mark cards as given to others. The function also provides a way to export and import the card data in JSON format.
 
 ## Inputs
