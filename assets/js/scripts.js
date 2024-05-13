@@ -789,3 +789,33 @@ function getDuplicateCards() {
     // Filter out cards with only one instance (not duplicates)
     return Object.fromEntries(Object.entries(duplicates).filter(([code, count]) => count > 1));
 }
+
+document.getElementById('generateReport').addEventListener('click', function () {
+    const missingCards = localStorage.getItem('missingCards');  // Assurez-vous que ces données sont stockées auparavant
+    const ownedCards = localStorage.getItem('ownedCards');
+    const duplicateCards = localStorage.getItem('duplicateCards');
+
+    fetch('https://euro-cards-ten.vercel.app/api/generateDocs', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            missingCards: JSON.parse(missingCards),
+            ownedCards: JSON.parse(ownedCards),
+            duplicateCards: JSON.parse(duplicateCards)
+        })
+    })
+        .then(response => response.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "report.docx";
+            document.body.appendChild(a); // Append the element to work in Firefox
+            a.click();
+            a.remove();  // After downloading remove the element and revoke the URL
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => console.error('Error:', error));
+});
