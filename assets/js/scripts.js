@@ -826,7 +826,7 @@ document.getElementById('generateReport').addEventListener('click', function () 
 
     console.log(missingCards);
 
-    fetch('https://euro-cards-ten.vercel.app/api/generateDocs', {
+    fetch('euro-cards-git-mainwithstorage-piagsands-projects.vercel.app/api/generateDocs', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
