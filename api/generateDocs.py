@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 from http.server import BaseHTTPRequestHandler
 from docx import Document
 import io
