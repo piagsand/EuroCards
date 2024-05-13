@@ -40,7 +40,7 @@ body {
   margin: 5px;
   padding: 5px;
   border: 1px solid #ccc;
-  width: 10%;
+  width: 100px;
   list-style-type: none;
 }
 .cards-missing-list-1 ul {
@@ -65,7 +65,7 @@ body {
   transform: translateY(-2px);
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   transform: scale(1);
   margin-right: 10px;
   cursor: pointer;
@@ -117,7 +117,8 @@ input[type=checkbox] {
   margin: 0 20px;
   padding: 10px 15px;
   color: rgba(243, 243, 1, 0.813);
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-weight: 500;
 }
 
@@ -191,7 +192,7 @@ input[type=checkbox] {
   transform: translateY(-2px);
 }
 
-cardItem input[type=checkbox] {
+cardItem input[type="checkbox"] {
   cursor: pointer;
   cursor: pointer;
 }
@@ -222,7 +223,7 @@ cardItem li {
   width: 30px;
   height: 30px;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   border-radius: 50%;
   margin-right: 10px;
   cursor: pointer;
@@ -296,7 +297,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-input[type=text] {
+input[type="text"] {
   padding: 10px;
   margin: 10px 0;
   width: 100%;
@@ -305,7 +306,7 @@ input[type=text] {
   border-radius: 8px;
   font-size: 0.9rem;
 }
-input[type=text]:focus {
+input[type="text"]:focus {
   border-color: #1f7a1f;
 }
 
@@ -351,4 +352,4 @@ input[type=text]:focus {
     width: 100%;
     text-align: center;
   }
-}/*# sourceMappingURL=styleGood.css.map */
+} /*# sourceMappingURL=styleGood.css.map */
