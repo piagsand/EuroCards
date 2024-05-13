@@ -1,6 +1,11 @@
 # Paxalom-uefa
 
-## todo
+## NEWS
+
+2024-05-13
+
+- the branch "main_with_storage" is updated. He stores the lists in the variable storage. It is more useful and secure, if the user refresh, he doesn't loose their data, no need to export every time.
+- add button with the a function "reset that allows to reset the date if there is more than 2 users.
 
 The code snippet is a JavaScript function that manages a collection of football cards for the UEFA Euro tournament. It allows users to add cards to their collection, mark cards as duplicates, and mark cards as given to others. The function also provides a way to export and import the card data in JSON format.
 
