@@ -7,9 +7,14 @@ onload = function () {
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
 }
 
-let ownedCards = [];
-let missingCards = [];
-let duplicateCards = {};
+// let ownedCards = [];
+// let missingCards = [];
+// let duplicateCards = {};
+
+let ownedCards = JSON.parse(localStorage.getItem('ownedCards')) || [];
+let missingCards = JSON.parse(localStorage.getItem('missingCards')) || [];
+let duplicateCards = JSON.parse(localStorage.getItem('duplicateCards')) || {};
+
 
 /* ******************************************************* */
 //Liste de toutes les cartes disponibles 
@@ -46,7 +51,7 @@ const euroCards = {
         "Denmark": ["DEN-P1", "DEN-P2", "DEN-PTW", "DEN-SP", "DEN-TOP1", "DEN-TOP2", "DEN-1", "DEN-2", "DEN-3", "DEN-4", "DEN-5", "DEN-6", "DEN-7", "DEN-8", "DEN-9", "DEN-10", "DEN-11", "DEN-12", "DEN-13", "DEN-14", "DEN-15", "DEN-16", "DEN-17", "DEN-18", "DEN-19", "DEN-20", "DEN-21"],
         "Serbia": ["SRB-P1", "SRB-P2", "SRB-PTW", "SRB-SP", "SRB-TOP1", "SRB-TOP2", "SRB-1", "SRB-2", "SRB-3", "SRB-4", "SRB-5", "SRB-6", "SRB-7", "SRB-8", "SRB-9", "SRB-10", "SRB-11", "SRB-12", "SRB-13", "SRB-14", "SRB-15", "SRB-16", "SRB-17", "SRB-18", "SRB-19", "SRB-20", "SRB-21"],
         "England": ["ENG-P1", "ENG-P2", "ENG-PTW", "ENG-SP", "ENG-TOP1", "ENG-TOP2", "ENG-1", "ENG-2", "ENG-3", "ENG-4", "ENG-5", "ENG-6", "ENG-7", "ENG-8", "ENG-9", "ENG-10", "ENG-11", "ENG-12", "ENG-13", "ENG-14", "ENG-15", "ENG-16", "ENG-17", "ENG-18", "ENG-19", "ENG-20", "ENG-21"],
-        "Special": ["MM-1", "MM-2"],
+        "SpecialC": ["MM-1", "MM-2"],
 
     },
 
@@ -341,6 +346,7 @@ function displayGroups() {
     });
 
     container.insertBefore(topNavigation, container.firstChild);
+
 }
 
 function addCards() {
@@ -371,13 +377,19 @@ function addCards() {
     });
 
 
+    updateMissingCards(); // Mettez à jour les cartes manquantes
+
+
     updateList('missingCards', missingCards);
     updateList('ownedCards', ownedCards);
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
     displayMessage(addedCards, duplicateCardsNotif, invalidCards);
     displayGroups(); // Ajout de cette ligne pour rafraîchir l'affichage des groupes
 
-    console.log(duplicateCards);
+    // Mise à jour de localStorage
+    localStorage.setItem('ownedCards', JSON.stringify(ownedCards));
+    localStorage.setItem('missingCards', JSON.stringify(missingCards));
+    localStorage.setItem('duplicateCards', JSON.stringify(duplicateCards));
 }
 function isCardValid(cardNumber) {
     const validCards = new Set(Object.values(euroCards).flatMap(group => Object.values(group).flat()));
@@ -428,11 +440,8 @@ function moveSelectedToOwned() {
 
 
 function updateMissingCards() {
-    const allCards = Object.values(euroCards).flatMap(group =>
-        Object.values(group).flat()
-    );
-    missingCards = allCards.filter(card => !ownedCards.includes(card));
-    displayGroups(); // Mettre à jour l'affichage des cartes manquantes
+    const allCards = Object.values(euroCards).flat(); // Obtenez toutes les cartes disponibles de euroCards
+    missingCards = allCards.filter(card => !ownedCards.includes(card)); // Filtrez les cartes qui ne se trouvent pas dans ownedCards
 }
 function updateList(listId, items) {
     const list = document.getElementById(listId);
@@ -498,6 +507,10 @@ function markAsDuplicate() {
     });
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
     // updateMissingCards();
+    // Mise à jour de localStorage
+    localStorage.setItem('ownedCards', JSON.stringify(ownedCards));
+    localStorage.setItem('missingCards', JSON.stringify(missingCards));
+    localStorage.setItem('duplicateCards', JSON.stringify(duplicateCards));
 }
 
 
@@ -520,6 +533,10 @@ function markGivenCards() {
     });
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
     displayFeedback(processedCards, removedCards, 'messageDouble');
+    // Mise à jour de localStorage
+    localStorage.setItem('ownedCards', JSON.stringify(ownedCards));
+    localStorage.setItem('missingCards', JSON.stringify(missingCards));
+    localStorage.setItem('duplicateCards', JSON.stringify(duplicateCards));
 }
 
 
@@ -555,6 +572,10 @@ function markCheckedAsGiven() {
     });
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
     displayFeedback(processedCards, removedCards);
+    // Mise à jour de localStorage
+    localStorage.setItem('ownedCards', JSON.stringify(ownedCards));
+    localStorage.setItem('missingCards', JSON.stringify(missingCards));
+    localStorage.setItem('duplicateCards', JSON.stringify(duplicateCards));
 }
 function displayFeedback(processedCards, removedCards) {
     const messageElement = document.getElementById('messageDouble');
@@ -600,6 +621,11 @@ function importDataFromJson(event) {
             ownedCards = data.ownedCards;
             missingCards = data.missingCards;
             duplicateCards = data.duplicateCards;
+
+            // Mise à jour de localStorage
+            localStorage.setItem('ownedCards', JSON.stringify(ownedCards));
+            localStorage.setItem('missingCards', JSON.stringify(missingCards));
+            localStorage.setItem('duplicateCards', JSON.stringify(duplicateCards));
 
             updateList('ownedCards', ownedCards);
             updateList('missingCards', missingCards);
@@ -790,10 +816,15 @@ function getDuplicateCards() {
     return Object.fromEntries(Object.entries(duplicates).filter(([code, count]) => count > 1));
 }
 
+
+// Fonction qui génère un document words en faisant appele à un script python.
+
 document.getElementById('generateReport').addEventListener('click', function () {
     const missingCards = localStorage.getItem('missingCards');  // Assurez-vous que ces données sont stockées auparavant
     const ownedCards = localStorage.getItem('ownedCards');
     const duplicateCards = localStorage.getItem('duplicateCards');
+
+    console.log(missingCards);
 
     fetch('https://euro-cards-ten.vercel.app/api/generateDocs', {
         method: 'POST',
@@ -818,4 +849,23 @@ document.getElementById('generateReport').addEventListener('click', function () 
             window.URL.revokeObjectURL(url);
         })
         .catch(error => console.error('Error:', error));
+});
+
+// Ajout de la fonction pour réinitialiser les données
+document.getElementById('resetButton').addEventListener('click', function () {
+    // Réinitialiser les variables à leurs valeurs d'origine
+    ownedCards = [];
+    missingCards = [];
+    duplicateCards = {};
+
+    // Réinitialiser les données dans localStorage
+    localStorage.removeItem('ownedCards');
+    localStorage.removeItem('missingCards');
+    localStorage.removeItem('duplicateCards');
+
+    // Mettre à jour les listes et l'affichage
+    updateList('ownedCards', ownedCards);
+    updateList('missingCards', missingCards);
+    updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
+    displayGroups(); // Rafraîchir l'affichage des groupes
 });
