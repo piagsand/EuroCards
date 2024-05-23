@@ -6,10 +6,16 @@
 - Warning : when you refresh you will loose your data. You have to export : it will create a cards_data.json in your download.
 - The function displayGroups will upload the data from a list in the first loading.
 
+**2024-05-23**
+
+- the branch **main_with_storage** is updated. He stores the lists in the variable storage.
+  It is more useful and secure, if the user refresh, he doesn't loose their data, no need to export every time.
+- the function "ExportToPdf" export the listing of the cards with his country ordered by the classification of TOPPS
+
 **2024-05-13**
 
 - the branch **main_with_storage** is updated. He stores the lists in the variable storage. It is more useful and secure, if the user refresh, he doesn't loose their data, no need to export every time.
-- add button with the a function "reset that allows to reset the data if there is more than 2 users.
+- added button with the a function "reset that allows to reset the data if there is more than 2 users.
 
 ## Purpose
 
