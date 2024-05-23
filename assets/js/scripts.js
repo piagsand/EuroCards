@@ -7,10 +7,6 @@ onload = function () {
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
 }
 
-// let ownedCards = [];
-// let missingCards = [];
-// let duplicateCards = {};
-
 let ownedCards = JSON.parse(localStorage.getItem('ownedCards')) || [];
 let missingCards = JSON.parse(localStorage.getItem('missingCards')) || [];
 let duplicateCards = JSON.parse(localStorage.getItem('duplicateCards')) || {};
@@ -39,7 +35,7 @@ const euroCards = {
     "Group B": {
         "Special": ["GB-1", "GB-2"],
 
-        "Spain": ["ES-P1", "ES-P2", "ES-PTW", "ES-SP", "ES-TOP1", "ES-TOP2", "ES-1", "ES-2", "ES-3", "ES-4", "ES-5", "ES-6", "ES-7", "ES-8", "ES-9", "ES-10", "ES-11", "ES-12", "ES-13", "ES-14", "ES-15", "ES-16", "ES-17", "ES-18", "ES-19", "ES-20", "ES-21"],
+        "Spain": ["ESP-P1", "ESP-P2", "ESP-PTW", "ESP-SP", "ESP-TOP1", "ESP-TOP2", "ESP-1", "ESP-2", "ESP-3", "ESP-4", "ESP-5", "ESP-6", "ESP-7", "ESP-8", "ESP-9", "ESP-10", "ESP-11", "ESP-12", "ESP-13", "ESP-14", "ESP-15", "ESP-16", "ESP-17", "ESP-18", "ESP-19", "ESP-20", "ESP-21"],
         "Croatia": ["CRO-P1", "CRO-P2", "CRO-PTW", "CRO-SP", "CRO-TOP1", "CRO-TOP2", "CRO-1", "CRO-2", "CRO-3", "CRO-4", "CRO-5", "CRO-6", "CRO-7", "CRO-8", "CRO-9", "CRO-10", "CRO-11", "CRO-12", "CRO-13", "CRO-14", "CRO-15", "CRO-16", "CRO-17", "CRO-18", "CRO-19", "CRO-20", "CRO-21"],
         "Italy": ["ITA-P1", "ITA-P2", "ITA-PTW", "ITA-SP", "ITA-TOP1", "ITA-TOP2", "ITA-1", "ITA-2", "ITA-3", "ITA-4", "ITA-5", "ITA-6", "ITA-7", "ITA-8", "ITA-9", "ITA-10", "ITA-11", "ITA-12", "ITA-13", "ITA-14", "ITA-15", "ITA-16", "ITA-17", "ITA-18", "ITA-19", "ITA-20", "ITA-21"],
         "Albania": ["ALB-P1", "ALB-P2", "ALB-PTW", "ALB-SP", "ALB-TOP1", "ALB-TOP2", "ALB-1", "ALB-2", "ALB-3", "ALB-4", "ALB-5", "ALB-6", "ALB-7", "ALB-8", "ALB-9", "ALB-10", "ALB-11", "ALB-12", "ALB-13", "ALB-14", "ALB-15", "ALB-16", "ALB-17", "ALB-18", "ALB-19", "ALB-20", "ALB-21"]
@@ -47,6 +43,7 @@ const euroCards = {
 
     "Group C": {
         "Special": ["GC-1", "GC-2"],
+
         "Slovenia": ["SVN-P1", "SVN-P2", "SVN-PTW", "SVN-SP", "SVN-TOP1", "SVN-TOP2", "SVN-1", "SVN-2", "SVN-3", "SVN-4", "SVN-5", "SVN-6", "SVN-7", "SVN-8", "SVN-9", "SVN-10", "SVN-11", "SVN-12", "SVN-13", "SVN-14", "SVN-15", "SVN-16", "SVN-17", "SVN-18", "SVN-19", "SVN-20", "SVN-21"],
         "Denmark": ["DEN-P1", "DEN-P2", "DEN-PTW", "DEN-SP", "DEN-TOP1", "DEN-TOP2", "DEN-1", "DEN-2", "DEN-3", "DEN-4", "DEN-5", "DEN-6", "DEN-7", "DEN-8", "DEN-9", "DEN-10", "DEN-11", "DEN-12", "DEN-13", "DEN-14", "DEN-15", "DEN-16", "DEN-17", "DEN-18", "DEN-19", "DEN-20", "DEN-21"],
         "Serbia": ["SRB-P1", "SRB-P2", "SRB-PTW", "SRB-SP", "SRB-TOP1", "SRB-TOP2", "SRB-1", "SRB-2", "SRB-3", "SRB-4", "SRB-5", "SRB-6", "SRB-7", "SRB-8", "SRB-9", "SRB-10", "SRB-11", "SRB-12", "SRB-13", "SRB-14", "SRB-15", "SRB-16", "SRB-17", "SRB-18", "SRB-19", "SRB-20", "SRB-21"],
@@ -57,6 +54,7 @@ const euroCards = {
 
     "Group D": {
         "Special": ["GD-1", "GD-2"],
+
         "Poland": ["POL-1", "POL-2", "POL-3", "POL-4", "POL-5", "POL-6", "POL-7", "POL-8", "POL-9", "POL-10", "POL-11", "POL-12", "POL-13", "POL-14", "POL-15"],
         "Estonia": ["EST-1", "EST-2", "EST-3", "EST-4", "EST-5", "EST-6", "EST-7", "EST-8", "EST-9", "EST-10", "EST-11", "EST-12", "EST-13", "EST-14", "EST-15"],
         "Wales": ["WAL-1", "WAL-2", "WAL-3", "WAL-4", "WAL-5", "WAL-6", "WAL-7", "WAL-8", "WAL-9", "WAL-10", "WAL-11", "WAL-12", "WAL-13", "WAL-14", "WAL-15"],
@@ -68,6 +66,7 @@ const euroCards = {
 
     "Group E": {
         "Special": ["GE-1", "GE-2"],
+
         "Belgium": ["BEL-P1", "BEL-P2", "BEL-PTW", "BEL-SP", "BEL-TOP1", "BEL-TOP2", "BEL-1", "BEL-2", "BEL-3", "BEL-4", "BEL-5", "BEL-6", "BEL-7", "BEL-8", "BEL-9", "BEL-10", "BEL-11", "BEL-12", "BEL-13", "BEL-14", "BEL-15", "BEL-16", "BEL-17", "BEL-18", "BEL-19", "BEL-20", "BEL-21"],
         "Slovakia": ["SVK-P1", "SVK-P2", "SVK-PTW", "SVK-SP", "SVK-TOP1", "SVK-TOP2", "SVK-1", "SVK-2", "SVK-3", "SVK-4", "SVK-5", "SVK-6", "SVK-7", "SVK-8", "SVK-9", "SVK-10", "SVK-11", "SVK-12", "SVK-13", "SVK-14", "SVK-15", "SVK-16", "SVK-17", "SVK-18", "SVK-19", "SVK-20", "SVK-21"],
         "Romania": ["ROM-P1", "ROM-P2", "ROM-PTW", "ROM-SP", "ROM-TOP1", "ROM-TOP2", "ROM-1", "ROM-2", "ROM-3", "ROM-4", "ROM-5", "ROM-6", "ROM-7", "ROM-8", "ROM-9", "ROM-10", "ROM-11", "ROM-12", "ROM-13", "ROM-14", "ROM-15", "ROM-16", "ROM-17", "ROM-18", "ROM-19", "ROM-20", "ROM-21"],
@@ -79,13 +78,14 @@ const euroCards = {
 
     "Group F": {
         "Special": ["GF-1", "GF-2"],
+
         "Turkey": ["TUR-P1", "TUR-P2", "TUR-PTW", "TUR-SP", "TUR-TOP1", "TUR-TOP2", "TUR-1", "TUR-2", "TUR-3", "TUR-4", "TUR-5", "TUR-6", "TUR-7", "TUR-8", "TUR-9", "TUR-10", "TUR-11", "TUR-12", "TUR-13", "TUR-14", "TUR-15", "TUR-16", "TUR-17", "TUR-18", "TUR-19", "TUR-20", "TUR-21"],
         "Georgia": ["GEO-1", "GEO-2", "GEO-3", "GEO-4", "GEO-5", "GEO-6", "GEO-7", "GEO-8", "GEO-9", "GEO-10", "GEO-11", "GEO-12", "GEO-13", "GEO-14", "GEO-15"],
         "Luxembourg": ["LUX-1", "LUX-2", "LUX-3", "LUX-4", "LUX-5", "LUX-6", "LUX-7", "LUX-8", "LUX-9", "LUX-10", "LUX-11", "LUX-12", "LUX-13", "LUX-14", "LUX-15"],
         "Greece": ["GREC-1", "GREC-2", "GREC-3", "GREC-4", "GREC-5", "GREC-6", "GREC-7", "GREC-8", "GREC-9", "GREC-10", "GREC-11", "GREC-12", "GREC-13", "GREC-14", "GREC-15"],
         "Kazakhstan": ["KAZ-1", "KAZ-2", "KAZ-3", "KAZ-4", "KAZ-5", "KAZ-6", "KAZ-7", "KAZ-8", "KAZ-9", "KAZ-10", "KAZ-11", "KAZ-12", "KAZ-13", "KAZ-14", "KAZ-15"],
         "Portugal": ["POR-P1", "POR-P2", "POR-PTW", "POR-SP", "POR-TOP1", "POR-TOP2", "POR-1", "POR-2", "POR-3", "POR-4", "POR-5", "POR-6", "POR-7", "POR-8", "POR-9", "POR-10", "POR-11", "POR-12", "POR-13", "POR-14", "POR-15", "POR-16", "POR-17", "POR-18", "POR-19", "POR-20", "POR-21"],
-        "Czechia": ["CZE-P1", "SCZECO-P2", "CZE-PTW", "CZE-SP", "CZE-TOP1", "CZE-TOP2", "CZE-1", "CZE-2", "CZE-3", "CZE-4", "CZE-5", "CZE-6", "CZE-7", "CZE-8", "CZE-9", "CZE-10", "CZE-11", "CZE-12", "CZE-13", "CZE-14", "CZE-15", "CZE-16", "CZE-17", "CZE-18", "CZE-19", "CZE-20", "CZE-21"],
+        "Czechia": ["CZE-P1", "CZE-P2", "CZE-PTW", "CZE-SP", "CZE-TOP1", "CZE-TOP2", "CZE-1", "CZE-2", "CZE-3", "CZE-4", "CZE-5", "CZE-6", "CZE-7", "CZE-8", "CZE-9", "CZE-10", "CZE-11", "CZE-12", "CZE-13", "CZE-14", "CZE-15", "CZE-16", "CZE-17", "CZE-18", "CZE-19", "CZE-20", "CZE-21"],
     },
 
     "EURO LEGEND": {
@@ -120,120 +120,6 @@ const countryFlags = {
 //Affiche les données au démarrage en utilisant le DOM
 /*cette fonction organise et affiche une structure complexe de données (groupes, pays, cartes) de manière interactive, 
 en utilisant des éléments HTML dynamiquement générés et manipulés via JavaScript. */
-
-// function displayGroups() {
-//     const container = document.getElementById('groupsContainer');
-//     const topNavigation = document.createElement('div');
-
-//     topNavigation.className = 'top-navigation';
-//     topNavigation.id = 'top-navigation';
-//     container.innerHTML = '';
-
-//     Object.keys(euroCards).forEach(group => {
-//         const groupLinkId = `group-${group.replace(/\s+/g, '-').toLowerCase()}`;
-//         const navLink = document.createElement('a');
-//         navLink.href = `#${groupLinkId}`;
-//         navLink.textContent = group;
-//         topNavigation.appendChild(navLink);
-
-//         const groupDiv = document.createElement('div');
-//         groupDiv.id = groupLinkId;
-
-//         const groupHeaderContainer = document.createElement('div');
-//         groupHeaderContainer.style.display = 'flex';
-//         groupHeaderContainer.style.alignItems = 'center';
-//         groupHeaderContainer.style.justifyContent = 'center';
-
-//         const groupHeader = document.createElement('h2');
-//         groupHeader.textContent = group;
-//         groupHeader.className = "countries";
-
-//         groupHeader.onclick = () => {
-//             document.getElementById('top-navigation').scrollIntoView({ behavior: 'smooth' });
-//         };
-//         groupHeaderContainer.appendChild(groupHeader);
-
-//         const flagsContainer = document.createElement('div');
-//         flagsContainer.className = 'flags-container';
-//         flagsContainer.style.marginLeft = '10px';
-
-//         const countriesDiv = document.createElement('div');
-
-//         Object.keys(euroCards[group]).forEach(country => {
-//             const countryId = `${group}-${country.replace(/\s+/g, '-').toLowerCase()}`;
-
-//             if (countryFlags[country]) {
-//                 const flagImg = document.createElement('img');
-//                 flagImg.src = countryFlags[country];
-//                 flagImg.alt = `Flag of ${country}`;
-//                 flagImg.className = 'country-flag';
-//                 flagImg.title = country;
-//                 flagImg.onclick = () => {
-//                     document.getElementById(countryId).scrollIntoView({ behavior: 'smooth' });
-//                 };
-//                 flagsContainer.appendChild(flagImg);
-//             }
-
-//             const countryDiv = document.createElement('div');
-//             countryDiv.id = countryId;
-
-//             const countryHeader = document.createElement('h3');
-//             countryHeader.className = 'country-header';
-
-//             if (countryFlags[country]) {
-//                 const countryFlagImg = document.createElement('img');
-//                 countryFlagImg.src = countryFlags[country];
-//                 countryFlagImg.alt = `Flag of ${country}`;
-//                 countryFlagImg.className = 'country-flag';
-
-//                 countryFlagImg.onclick = () => {
-//                     document.getElementById(groupLinkId).scrollIntoView({ behavior: 'smooth' });
-//                 };
-//                 countryHeader.appendChild(countryFlagImg);
-//             }
-
-//             countryHeader.appendChild(document.createTextNode(country));
-//             countryDiv.appendChild(countryHeader);
-
-//             const cardsList = document.createElement('ul');
-//             cardsList.className = 'cards-missing-list';
-
-//             euroCards[group][country].forEach(card => {
-//                 if (!ownedCards.includes(card)) {
-//                     const cardItem = document.createElement('li');
-//                     cardItem.className = 'cards-missing-list-1';
-
-//                     cardItem.style.cursor = 'pointer';
-
-//                     const checkbox = document.createElement('input');
-//                     checkbox.type = 'checkbox';
-//                     checkbox.value = card;
-//                     checkbox.name = card;
-
-//                     checkbox.addEventListener('click', (e) => e.stopPropagation());
-
-//                     cardItem.appendChild(checkbox);
-//                     cardItem.appendChild(document.createTextNode(card));
-//                     cardItem.addEventListener('click', () => {
-//                         checkbox.checked = !checkbox.checked;
-//                     });
-
-//                     cardsList.appendChild(cardItem);
-//                 }
-//             });
-
-//             countryDiv.appendChild(cardsList);
-//             countriesDiv.appendChild(countryDiv);
-//         });
-
-//         groupHeaderContainer.appendChild(flagsContainer);
-//         groupDiv.appendChild(groupHeaderContainer);
-//         groupDiv.appendChild(countriesDiv);
-//         container.appendChild(groupDiv);
-//     });
-
-//     container.insertBefore(topNavigation, container.firstChild);
-// }
 function displayGroups() {
     const container = document.getElementById('groupsContainer');
     const topNavigation = document.createElement('div');
@@ -346,8 +232,9 @@ function displayGroups() {
     });
 
     container.insertBefore(topNavigation, container.firstChild);
-
 }
+
+/* ******************************************************* */
 
 function addCards() {
     const cardInput = document.getElementById('cardInput');
@@ -376,28 +263,30 @@ function addCards() {
         }
     });
 
-
-    updateMissingCards(); // Mettez à jour les cartes manquantes
-
+    updateMissingCards();
 
     updateList('missingCards', missingCards);
     updateList('ownedCards', ownedCards);
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
     displayMessage(addedCards, duplicateCardsNotif, invalidCards);
-    displayGroups(); // Ajout de cette ligne pour rafraîchir l'affichage des groupes
+    displayGroups();
 
-    // Mise à jour de localStorage
+    console.log(missingCards);
+
     localStorage.setItem('ownedCards', JSON.stringify(ownedCards));
     localStorage.setItem('missingCards', JSON.stringify(missingCards));
     localStorage.setItem('duplicateCards', JSON.stringify(duplicateCards));
 }
+/* ******************************************************* */
+/* Function to check if a card number is valid  */
+
 function isCardValid(cardNumber) {
     const validCards = new Set(Object.values(euroCards).flatMap(group => Object.values(group).flat()));
 
-    // Normalisation du numéro de la carte
     const normalizedCardNumber = cardNumber.toUpperCase().replace(/[^A-Z0-9]/g, '').replace(/(\D)(\d)/g, '$1-$2');
     return validCards.has(normalizedCardNumber);
 }
+/* ******************************************************* */
 
 function displayMessage(addedCards, duplicateCards, invalidCards) {
     const messageElement = document.getElementById('message');
@@ -421,6 +310,8 @@ function displayMessage(addedCards, duplicateCards, invalidCards) {
     }).join('');
 }
 
+/* ******************************************************* */
+
 function moveSelectedToOwned() {
     const checkboxes = document.querySelectorAll('.cards-missing-list input[type="checkbox"]:checked');
     checkboxes.forEach(checkbox => {
@@ -435,23 +326,24 @@ function moveSelectedToOwned() {
         checkbox.parentElement.style.display = 'none';
     });
     updateList('ownedCards', ownedCards);
-    displayGroups(); // Mettre à jour l'affichage des cartes manquantes
+    displayGroups();
 }
-
+/* ******************************************************* */
 
 function updateMissingCards() {
-    const allCards = Object.values(euroCards).flat(); // Obtenez toutes les cartes disponibles de euroCards
-    missingCards = allCards.filter(card => !ownedCards.includes(card)); // Filtrez les cartes qui ne se trouvent pas dans ownedCards
+    const allCards = Object.values(euroCards).flatMap(group => Object.values(group).flat());
+    missingCards = allCards.filter(card => !ownedCards.includes(card));
 }
+/* ******************************************************* */
+
 function updateList(listId, items) {
     const list = document.getElementById(listId);
     list.innerHTML = '';
 
-    // Cacher la liste des cartes manquantes
     if (listId === 'missingCards') {
         list.style.display = 'none';
     } else {
-        list.style.display = ''; // Assurez-vous que les autres listes sont visibles
+        list.style.display = '';
     }
 
     if (Array.isArray(items)) {
@@ -469,6 +361,7 @@ function updateList(listId, items) {
         return;
     }
 }
+/* ******************************************************* */
 
 function createListItemWithCheckbox(key, count) {
     const listItem = document.createElement('li');
@@ -490,6 +383,7 @@ function createListItemWithCheckbox(key, count) {
 
     return listItem;
 }
+/* ******************************************************* */
 
 function createCheckbox(value) {
     const checkbox = document.createElement('input');
@@ -497,6 +391,8 @@ function createCheckbox(value) {
     checkbox.value = value;
     return checkbox;
 }
+
+/* ******************************************************* */
 
 function markAsDuplicate() {
     const checkboxes = document.querySelectorAll('#ownedCards input[type="checkbox"]:checked');
@@ -506,13 +402,11 @@ function markAsDuplicate() {
         checkbox.checked = false;
     });
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
-    // updateMissingCards();
-    // Mise à jour de localStorage
     localStorage.setItem('ownedCards', JSON.stringify(ownedCards));
     localStorage.setItem('missingCards', JSON.stringify(missingCards));
     localStorage.setItem('duplicateCards', JSON.stringify(duplicateCards));
 }
-
+/* ******************************************************* */
 
 //Fonction enlever double
 function markGivenCards() {
@@ -521,7 +415,7 @@ function markGivenCards() {
     let removedCards = [];
 
     checkboxes.forEach(checkbox => {
-        const cardNumber = checkbox.value.trim().split(' ')[0]; // Modification ici
+        const cardNumber = checkbox.value.trim().split(' ')[0];
         if (duplicateCards[cardNumber] > 1) {
             duplicateCards[cardNumber] -= 1;
             processedCards.push(`${cardNumber} (${duplicateCards[cardNumber]}x)`);
@@ -533,26 +427,25 @@ function markGivenCards() {
     });
     updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
     displayFeedback(processedCards, removedCards, 'messageDouble');
-    // Mise à jour de localStorage
     localStorage.setItem('ownedCards', JSON.stringify(ownedCards));
     localStorage.setItem('missingCards', JSON.stringify(missingCards));
     localStorage.setItem('duplicateCards', JSON.stringify(duplicateCards));
 }
 
+/* ******************************************************* */
 
-
-function displayFeedback(processedCards, cards, elementId) {
-    const messageElement = document.getElementById('messageDouble');
+function displayFeedback(processedCards, removedCards, elementId) {
+    const messageElement = document.getElementById(elementId);
     let message = '';
     if (processedCards.length > 0) {
-        message += `Traitées : ${processedCards.join(', ')}. `;
+        message += `Cartes mises à jour : ${processedCards.join(', ')}. `;
     }
-    if (invalidCards.length > 0) {
-        message += `Invalides/non trouvées : ${invalidCards.join(', ')}.`;
+    if (removedCards.length > 0) {
+        message += `Cartes supprimées : ${removedCards.join(', ')}.`;
     }
     messageElement.textContent = message;
 }
-
+/* ******************************************************* */
 //fonction qui agit sur les doubles sélectionnés. 
 function markCheckedAsGiven() {
     const checkboxes = document.querySelectorAll('#duplicateCards input[type="checkbox"]:checked');
@@ -577,6 +470,8 @@ function markCheckedAsGiven() {
     localStorage.setItem('missingCards', JSON.stringify(missingCards));
     localStorage.setItem('duplicateCards', JSON.stringify(duplicateCards));
 }
+/* ******************************************************* */
+
 function displayFeedback(processedCards, removedCards) {
     const messageElement = document.getElementById('messageDouble');
     let message = '';
@@ -588,12 +483,11 @@ function displayFeedback(processedCards, removedCards) {
     }
     messageElement.textContent = message;
 }
-
+/* ******************************************************* */
 
 function exportDataToJson() {
     updateMissingCards();
 
-    // Création de l'objet à exporter
     const data = {
         ownedCards: ownedCards,
         missingCards: missingCards,
@@ -612,6 +506,8 @@ function exportDataToJson() {
     downloadAnchorNode.remove();
 }
 
+/* ******************************************************* */
+
 function importDataFromJson(event) {
     const fileReader = new FileReader();
     fileReader.onload = function (e) {
@@ -622,7 +518,6 @@ function importDataFromJson(event) {
             missingCards = data.missingCards;
             duplicateCards = data.duplicateCards;
 
-            // Mise à jour de localStorage
             localStorage.setItem('ownedCards', JSON.stringify(ownedCards));
             localStorage.setItem('missingCards', JSON.stringify(missingCards));
             localStorage.setItem('duplicateCards', JSON.stringify(duplicateCards));
@@ -630,163 +525,94 @@ function importDataFromJson(event) {
             updateList('ownedCards', ownedCards);
             updateList('missingCards', missingCards);
             updateList('duplicateCards', Object.keys(duplicateCards).map(key => `${key} (${duplicateCards[key]}x)`));
-            displayGroups(); // Rafraîchir l'affichage des groupes
+            displayGroups();
         } catch (error) {
             alert('Erreur lors de la lecture du fichier JSON : ' + error);
         }
     };
     fileReader.readAsText(event.target.files[0]);
 }
+/* ******************************************************* */
 
 
-
-function generatePDFContent(missingCards, duplicateCards) {
-    // Create PDF document instance
-    const doc = new jsPDF({ orientation: 'landscape' }); // Landscape orientation for better card layout
-
-    // Add header section with application title and date
-    doc.setFont('Arial', 'bold', 16);
-    doc.text('Rapport sur les cartes Euro manquantes et en double', 20, 20);
-    doc.setFont('Arial', 'normal', 12);
-    doc.text(`Date: ${new Date().toLocaleDateString()}`, 20, 35);
-
-    // Add section for missing cards
-    doc.setFont('Arial', 'bold', 14);
-    doc.text('Cartes manquantes', 20, 50);
-    doc.setFont('Arial', 'normal', 12);
-
-    // Check if there are any missing cards
-    if (missingCards.length === 0) {
-        doc.text('Aucune carte manquante.', 20, 65);
-    } else {
-        // Create a table to display missing cards
-        const table = {
-            header: ['Pays', 'Code carte'],
-            data: missingCards.map(card => [card.country, card.code])
-        };
-
-        doc.autoTable({
-            startY: 65,
-            table: table,
-            theme: 'striped',
-            styles: {
-                fontSize: 10,
-                columnWidth: {
-                    country: 50,
-                    cardCode: 50
-                }
-            }
-        });
-    }
-
-    // Add section for duplicate cards
-    doc.addPage(); // Start a new page for duplicate cards
-    doc.setFont('Arial', 'bold', 14);
-    doc.text('Cartes en double', 20, 20);
-    doc.setFont('Arial', 'normal', 12);
-
-    // Check if there are any duplicate cards
-    if (Object.keys(duplicateCards).length === 0) {
-        doc.text('Aucune carte en double.', 20, 35);
-    } else {
-        // Create a table to display duplicate cards
-        const table = {
-            header: ['Pays', 'Code carte', 'Nombre de doublons'],
-            data: Object.entries(duplicateCards).map(([country, count]) => [country, count[0], count[1]])
-        };
-
-        doc.autoTable({
-            startY: 35,
-            table: table,
-            theme: 'striped',
-            styles: {
-                fontSize: 10,
-                columnWidth: {
-                    country: 50,
-                    cardCode: 50,
-                    numDuplicates: 30
-                }
-            }
-        });
-    }
-
-    return doc; // Return the generated PDF document instance
-}
-
-// Function to trigger PDF generation and download
-// function printOrExportPDF() {
-//     const missingCards = getMissingCards(); // Get an updated list of missing cards
-//     const duplicateCards = getDuplicateCards(); // Get an updated list of duplicate cards
-
-//     // Generate PDF content
-//     const doc = generatePDFContent(missingCards, duplicateCards);
-
-//     // Get user preference (print or export)
-//     const action = prompt("Voulez-vous imprimer ou exporter le rapport PDF ? (imprimer/exporter)", "imprimer");
-
-//     if (action.toLowerCase() === 'imprimer') {
-//         // Open the PDF in a new browser window for printing
-//         doc.output('dataurlnewwindow');
-//     } else if (action.toLowerCase() === 'exporter') {
-//         // Save the PDF to a file
-//         const fileName = prompt("Entrez le nom du fichier PDF:", "rapport-cartes-euro.pdf");
-//         if (fileName) {
-//             doc.save(fileName);
-//             alert(`Rapport PDF sauvegardé sous le nom ${fileName}.`);
-//         } else {
-//             alert("L'exportation du PDF a été annulée.");
-//         }
-//     } else {
-//         alert("Action non valide. Veuillez choisir 'imprimer' ou 'exporter'.");
-//     }
-// }
 function printOrExportPDF() {
-    const missingCards = getMissingCards(); // Get an updated list of missing cards
-    const duplicateCards = getDuplicateCards(); // Get an updated list of duplicate cards
+    const missingCards = getMissingCardsByCountry();
+    const duplicateCards = getDuplicateCardsByCountry();
 
-    // Create a new jsPDF instance
-    var doc = new jsPDF('landscape'); // Set orientation to landscape
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('landscape');
 
-    // Add a title and the date to the PDF
+    // Add title and date
     doc.setFontSize(16);
-    doc.text('Rapport sur les cartes Euro manquantes et en double', 10, 20);
+    doc.text('Cartes Euro manquantes et en double', 10, 10);
     doc.setFontSize(12);
-    doc.text('Date: ' + new Date().toLocaleDateString(), 10, 30);
+    doc.text('Date: ' + new Date().toLocaleDateString(), 10, 20);
 
-    // Section for missing cards
+    // Missing Cards Section
     doc.setFontSize(14);
-    doc.text('Cartes manquantes:', 10, 40);
+    doc.text('Cartes manquantes:', 10, 30);
     doc.setFontSize(12);
-    if (missingCards.length === 0) {
-        doc.text('Aucune carte manquante.', 10, 50);
+
+    if (Object.keys(missingCards).length === 0) {
+        doc.text('Aucune carte manquante.', 10, 40);
     } else {
-        missingCards.forEach((card, index) => {
-            doc.text(card.code + ' - ' + card.country, 10, 60 + (10 * index));
+        let startY = 40;
+        Object.keys(missingCards).forEach(country => {
+            if (startY + 20 > doc.internal.pageSize.height - 10) {
+                doc.addPage();
+                startY = 10;
+            }
+            doc.setTextColor(0, 0, 255); // Set text color to blue
+            doc.text(country, 10, startY + 10); // More space before country name
+            doc.setTextColor(0, 0, 0); // Reset text color to black
+            const missingCardsRows = chunkArrayForTable(missingCards[country], 5);
+            doc.autoTable({
+                head: [['', '', '', '', '']], // Empty headers
+                body: missingCardsRows,
+                startY: startY + 15,
+                theme: 'striped'
+            });
+            startY = doc.autoTable.previous.finalY + 10;
         });
     }
 
-    // Section for duplicate cards
+    // Duplicate Cards Section
     doc.addPage();
     doc.setFontSize(14);
-    doc.text('Cartes en double:', 10, 20);
+    doc.text('Cartes en double:', 10, 10);
     doc.setFontSize(12);
+
+    let startY = 20;
     if (Object.keys(duplicateCards).length === 0) {
-        doc.text('Aucune carte en double.', 10, 30);
+        doc.text('Aucune carte en double.', 10, 20);
     } else {
-        Object.entries(duplicateCards).forEach(([card, count], index) => {
-            doc.text(card + ' - ' + count + ' fois', 10, 40 + (10 * index));
+        Object.keys(duplicateCards).forEach(country => {
+            if (startY + 20 > doc.internal.pageSize.height - 10) {
+                doc.addPage();
+                startY = 10;
+            }
+            doc.setTextColor(0, 0, 255); // Set text color to blue
+            doc.text(country, 10, startY + 10); // More space before country name
+            doc.setTextColor(0, 0, 0); // Reset text color to black
+            const duplicateCardsRows = chunkArrayForTable(duplicateCards[country], 5);
+            doc.autoTable({
+                head: [['', '', '', '', '']], // Empty headers
+                body: duplicateCardsRows,
+                startY: startY + 20,
+                theme: 'striped'
+            });
+            startY = doc.autoTable.previous.finalY + 10;
         });
     }
 
-    // Prompt user for action
-    var action = prompt("Voulez-vous imprimer ou exporter le rapport PDF ? (imprimer/exporter)", "imprimer");
+    let action = prompt("Voulez-vous imprimer ou exporter le rapport PDF ? (imprimer/exporter)", "imprimer");
     if (action.toLowerCase() === 'imprimer') {
-        doc.autoPrint(); // Auto print the PDF
-        window.open(doc.output('bloburl')); // Open PDF in a new window to trigger the print dialog
+        doc.autoPrint();
+        window.open(doc.output('bloburl'));
     } else if (action.toLowerCase() === 'exporter') {
-        var fileName = prompt("Entrez le nom du fichier PDF:", "rapport-cartes-euro.pdf");
+        let fileName = prompt("Entrez le nom du fichier PDF:", "rapport-cartes-euro.pdf");
         if (fileName) {
-            doc.save(fileName); // Save the PDF with the specified file name
+            doc.save(fileName);
         } else {
             alert("L'exportation du PDF a été annulée.");
         }
@@ -794,12 +620,63 @@ function printOrExportPDF() {
         alert("Action non valide. Veuillez choisir 'imprimer' ou 'exporter'.");
     }
 }
+/* ******************************************************* */
+
+function chunkArrayForTable(array, chunkSize) {
+    const rows = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+        const row = array.slice(i, i + chunkSize);
+        while (row.length < chunkSize) {
+            row.push(""); // Fill the row to ensure it has exactly `chunkSize` columns
+        }
+        rows.push(row);
+    }
+    return rows;
+}
+/* ******************************************************* */
+
+
+function getMissingCardsByCountry() {
+    const missingCardsByCountry = {};
+    Object.keys(euroCards).forEach(group => {
+        Object.keys(euroCards[group]).forEach(country => {
+            euroCards[group][country].forEach(card => {
+                if (!ownedCards.includes(card)) {
+                    if (!missingCardsByCountry[country]) {
+                        missingCardsByCountry[country] = [];
+                    }
+                    missingCardsByCountry[country].push(card);
+                }
+            });
+        });
+    });
+    return missingCardsByCountry;
+}
+/* ******************************************************* */
+
+function getDuplicateCardsByCountry() {
+    const duplicateCardsByCountry = {};
+    Object.keys(euroCards).forEach(group => {
+        Object.keys(euroCards[group]).forEach(country => {
+            euroCards[group][country].forEach(card => {
+                if (duplicateCards[card]) {
+                    if (!duplicateCardsByCountry[country]) {
+                        duplicateCardsByCountry[country] = [];
+                    }
+                    duplicateCardsByCountry[country].push(`${card} (${duplicateCards[card]} fois)`);
+                }
+            });
+        });
+    });
+    return duplicateCardsByCountry;
+}
+/* ******************************************************* */
 
 function getMissingCards() {
-    const allCards = Object.values(euroCards).flat(); // Get all available cards from euroCards
-    const missingCards = allCards.filter(card => !ownedCards.includes(card.code)); // Filter cards not found in ownedCards
-    return missingCards;
+    const allCards = Object.values(euroCards).flatMap(group => Object.values(group).flat());
+    return allCards.filter(card => !ownedCards.includes(card));
 }
+/* ******************************************************* */
 
 // Function to get a list of duplicate cards
 function getDuplicateCards() {
@@ -811,45 +688,9 @@ function getDuplicateCards() {
             duplicates[cardCode] = 1;
         }
     }
-
-    // Filter out cards with only one instance (not duplicates)
     return Object.fromEntries(Object.entries(duplicates).filter(([code, count]) => count > 1));
 }
-
-
-// Fonction qui génère un document words en faisant appele à un script python.
-
-// document.getElementById('generateReport').addEventListener('click', function () {
-//     const missingCards = localStorage.getItem('missingCards');  // Assurez-vous que ces données sont stockées auparavant
-//     const ownedCards = localStorage.getItem('ownedCards');
-//     const duplicateCards = localStorage.getItem('duplicateCards');
-
-//     console.log(missingCards);
-
-//     fetch('https://euro-cards-git-mainwithstorage-piagsands-projects.vercel.app//api/generateDocs', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             missingCards: JSON.parse(missingCards),
-//             ownedCards: JSON.parse(ownedCards),
-//             duplicateCards: JSON.parse(duplicateCards)
-//         })
-//     })
-//         .then(response => response.blob())
-//         .then(blob => {
-//             const url = window.URL.createObjectURL(blob);
-//             const a = document.createElement('a');
-//             a.href = url;
-//             a.download = "report.docx";
-//             document.body.appendChild(a); // Append the element to work in Firefox
-//             a.click();
-//             a.remove();  // After downloading remove the element and revoke the URL
-//             window.URL.revokeObjectURL(url);
-//         })
-//         .catch(error => console.error('Error:', error));
-// });
+/* ******************************************************* */
 
 document.getElementById('generateReport').addEventListener('click', function () {
     const missingCards = localStorage.getItem('missingCards');
@@ -889,6 +730,8 @@ document.getElementById('generateReport').addEventListener('click', function () 
             alert('Failed to generate report. Please try again.');
         });
 });
+/* ******************************************************* */
+
 // Ajout de la fonction pour réinitialiser les données
 document.getElementById('resetButton').addEventListener('click', function () {
     // Réinitialiser les variables à leurs valeurs d'origine
