@@ -1,84 +1,75 @@
-# Paxalom-uefa
+# Gestionnaire de cartes Euro 2024 de Topps
 
-## NEWS
+Bienvenue dans le Gestionnaire de cartes Euro 2024 de Topps, une application web simple et intuitive pour gérer votre collection de cartes. Ce projet vous permet de suivre les cartes manquantes, acquises et les doubles, tout en offrant des fonctionnalités d'import/export des données et d'impression.
 
-- the branch **main** has the code who is working. This is the base,
-- Warning : when you refresh you will loose your data. You have to export : it will create a cards_data.json in your download.
-- The function displayGroups will upload the data from a list in the first loading.
+## Fonctionnalités
 
-**2024-05-23**
+### Navigation
 
-- the branch **main_with_storage** is updated. He stores the lists in the variable storage.
-  It is more useful and secure, if the user refresh, he doesn't loose their data, no need to export every time.
-- the function "ExportToPdf" export the listing of the cards with his country ordered by the classification of TOPPS
+- **Logo et Navigation** : Le logo "PAXALOM-UEFA" et une barre de navigation pour accéder rapidement aux différentes sections : cartes manquantes, acquises et doubles.
+- **Boutons de gestion** : Des boutons pour ajouter des cartes, imprimer ou exporter en PDF.
 
-**2024-05-13**
+### Sections Principales
 
-- the branch **main_with_storage** is updated. He stores the lists in the variable storage. It is more useful and secure, if the user refresh, he doesn't loose their data, no need to export every time.
-- added button with the a function "reset that allows to reset the data if there is more than 2 users.
+1. **Cartes Manquantes** :
 
-## Purpose
+   - Entrez les numéros de cartes manquantes, séparés par des virgules.
+   - Affichez les cartes manquantes dans une liste.
 
-The website manages a collection of football cards for the UEFA Euro tournament. It allows users to add cards to their collection, mark cards as duplicates, and mark cards as given to others. The function also provides a way to export and import the card data in JSON format.
+2. **Cartes Acquises** :
 
-## Inputs
+   - Ajoutez des cartes à votre collection.
+   - Marquez des cartes comme doubles si vous les avez en plusieurs exemplaires.
 
-The function takes input from the user through various HTML elements, such as text inputs and checkboxes. The user can enter card numbers, select checkboxes to mark cards, and upload JSON files to import card data.
+3. **Cartes Doubles** :
+   - Affichez et gérez les cartes que vous avez en double.
+   - Marquez les cartes comme données ou enlevez-les des doubles.
 
-## Flow
+### Import/Export et Réinitialisation
 
-The function starts by defining an empty array for owned cards, an empty array for missing cards, and an empty object for duplicate cards.
+- **Export des données** : Exportez votre collection sous forme de fichier JSON.
+- **Import des données** : Importez un fichier JSON pour mettre à jour votre collection.
+- **Réinitialisation** : Réinitialisez votre collection.
 
-It then defines a constant variable euroCards that contains a nested object structure representing the available cards for each group in the tournament.
+### Impression
 
-The function displayGroups is called to render the card groups and countries on the webpage.
+- **Impression et Export PDF** : Imprimez votre collection ou exportez-la en PDF.
 
-The function onload is called when the page loads, which calls displayGroups and updates the lists of owned, missing, and duplicate cards.
+## Utilisation
 
-The function defines a set validCards that contains all the valid card numbers from the euroCards object.
+### Ajout de Cartes
 
-The function addCards is called when the user clicks a button to add cards to their collection. It extracts the card numbers from the input field, checks if the cards are valid, and updates the owned, missing, and duplicate cards lists accordingly.
+1. Saisissez les numéros de cartes dans le champ prévu à cet effet (ex : SUI-1, SUI-2, SUI-3).
+2. Cliquez sur "Ajouter les Cartes" pour ajouter les cartes à votre collection.
 
-The function moveSelectedToOwned is called when the user clicks a button to move selected missing cards to the owned cards list. It updates the owned and missing cards lists based on the user's selection.
+### Gestion des Cartes
 
-The function updateList is called to update the HTML lists of owned, missing, and duplicate cards.
+- **Cartes Manquantes** : Consultez la liste des cartes que vous devez encore acquérir.
+- **Cartes Acquises** : Marquez les cartes que vous avez obtenues.
+- **Cartes Doubles** : Gérez les cartes que vous avez en double et marquez celles que vous donnez à d'autres collectionneurs.
 
-The function createCheckbox is called to create checkboxes for each card in the lists.
+### Importer/Exporter des Données
 
-The function markAsDuplicate is called when the user clicks a button to mark selected owned cards as duplicates. It updates the duplicate cards object and clears the checkboxes.
+- Pour exporter les données : Cliquez sur "Exporter les données".
+- Pour importer les données : Cliquez sur "Importer les données" et sélectionnez le fichier JSON correspondant.
 
-The function exportDataToJson is called when the user clicks a button to export the card data as a JSON file. It creates a download link for the JSON file and triggers the download.
+### Impression
 
-The function importDataFromJson is called when the user selects a JSON file to import card data. It reads the file content, parses it as JSON, and updates the owned, missing, and duplicate cards lists.
+- Pour imprimer ou exporter en PDF : Cliquez sur le bouton "Impression".
 
-The function markGivenCards is called when the user clicks a button to mark given cards as duplicates. It updates the duplicate cards object based on the user's input.
-The function markCheckedAsGiven is called when the user clicks a button to mark selected duplicate cards as given. It updates the duplicate cards object and removes the corresponding checkboxes.
+## Dépendances
 
-The function displayFeedback is called to display feedback messages to the user after marking cards as given or removing duplicate cards.
+Ce projet utilise les bibliothèques suivantes :
 
-## Outputs
+- **jsPDF** : Pour la génération de documents PDF.
+- **FileSaver.js** : Pour la sauvegarde des fichiers exportés.
 
-The function updates the HTML lists of owned, missing, and duplicate cards based on the user's actions. It also displays feedback messages to the user after adding cards, marking cards as given, or removing duplicate cards.
+Les fichiers nécessaires sont inclus dans le répertoire `assets/libs`.
 
-## Usage example
+## Contributeurs
 
-// Add cards to the collection
-addCards();
+Projet créé par l'équipe PAXALOM-UEFA pour aider les collectionneurs de cartes Euro 2024 à mieux gérer leurs collections.
 
-// Move selected missing cards to owned cards
-moveSelectedToOwned();
+---
 
-// Mark selected owned cards as duplicates
-markAsDuplicate();
-
-// Export card data as JSON
-exportDataToJson();
-
-// Import card data from JSON
-importDataFromJson(event);
-
-// Mark given cards as duplicates
-markGivenCards();
-
-// Mark selected duplicate cards as given
-markCheckedAsGiven();
+Merci d'utiliser le Gestionnaire de cartes Euro 2024 de Topps ! Profitez de votre collection et bonne chance pour compléter votre album.
