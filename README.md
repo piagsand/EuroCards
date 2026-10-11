@@ -66,6 +66,9 @@ Ce projet utilise les bibliothèques suivantes :
 
 Les fichiers nécessaires sont inclus dans le répertoire `assets/libs`.
 
+[![Architecture diagram of piagsand/eurocards](https://gitdiagram.com/piagsand/eurocards/diagram.png)](https://gitdiagram.com/piagsand/eurocards?utm_source=readme&utm_medium=picture)
+
+
 ## Contributeurs
 
 Projet créé par l'équipe PAXALOM-UEFA pour aider les collectionneurs de cartes Euro 2024 à mieux gérer leurs collections.
